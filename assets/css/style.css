@@ -4,7 +4,7 @@ body {
     min-width: 576px;
 }
 
-input[type="search"] {
+input[type="search"],input[type="text"] {
     outline: none;
     border: none;
 }
@@ -67,6 +67,12 @@ input[type="search"] {
     height: 50px;
 }
 
+/* other utility selector  */
+
+.c_pointer {
+    cursor: pointer;
+}
+
 
 /* Container selctor  */
 
@@ -124,7 +130,7 @@ input[type="search"] {
 }
 
 .sidebar input[type="search"]::-webkit-input-placeholder {
-    color: #999;
+    color: var(--bz-baground1);
     font-size: 10px;
     padding-left: 10px;
     display: flex;
@@ -133,7 +139,7 @@ input[type="search"] {
 }
 
 .sidebar input[type="search"]::placeholder {
-    color: #999;
+    color: var(--bz-baground1);
     font-size: 10px;
     padding-left: 10px;
     display: flex;
@@ -157,6 +163,10 @@ input[type="search"] {
 .chats_list {
     border-bottom: 1px solid var(--bz-secondary);
     background-color: var(--bz-gray_light);
+}
+
+.chats_list:hover {
+background-color: var(--bz-secondary);
 }
 
 
@@ -184,5 +194,5 @@ input[type="search"] {
 
 .input_text_zone i {
     color: var(--bz-baground1);
-    padding: 0 25px;
+    padding: 0 20px;
 }
