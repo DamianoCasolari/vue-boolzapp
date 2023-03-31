@@ -31,13 +31,23 @@
                 <!-- create a container for the various chats (chat lists)  -->
                 <div class="contact_list col-4">
                     <!-- first static block with user profile, button turn on notification and search -->
-                    <div class="user_profile">
-
+                    <div class="user_profile standard_height d-flex justify-content-between align-items-center p-1 background_secondary">
+                        <div class="users_img d-flex align-items-center h-100">
+                            <img class="align-middle rounded-circle" src="./assets/img/avatar_io.jpg" alt="users_avatar">
+                            <div class="user_name ms-2 fs-6">Sofia</div>
+                        </div>
+                        <nav class="user_option d-flex align-items-center">
+                            <button class="border border-0 bg-transparent"><i
+                                    class="fa-solid fa-circle-notch"></i></button>
+                            <button class="border border-0 bg-transparent"><i class="fa-solid fa-message"></i></button>
+                            <button class="border border-0 bg-transparent"><i
+                                    class="fa-solid fa-ellipsis-vertical"></i></button>
+                        </nav>
                     </div>
                     <div class="turn_on_notifications">
 
                     </div>
-                    <input type="search" class="w-100">
+                    <input type="search" class="w-100" class="border border-0">
 
                     <!-- second block with a search name in chats list  -->
                     <ul class="">
