@@ -44,6 +44,7 @@
                            class="fa-solid fa-ellipsis-vertical"></i></button>
                   </nav>
                </div>
+               <!-- add notification banner  -->
                <div class="turn_on_notifications standard_height p-2">
                   <div class="users_img d-flex align-items-center h-100">
 
@@ -79,9 +80,9 @@
                </div>
             </div>
             <!-- create a container for main Chat  -->
-            <div class="main_chat col-8">
+            <div class="main_chat col-8 d-flex flex-column">
 
-               <div class="current_chat">
+               <div class="current_chat flex-grow-1">
                   <div
                      class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
                      <div class="users_img d-flex align-items-center">
@@ -91,6 +92,7 @@
                            <div class="Last_message_sent fs_7 color_time">Ultimo messaggio inviato</div>
                         </div>
                      </div>
+                     <!-- create nav bar current contact  -->
                      <nav class="user_option d-flex align-items-center">
                         <button class="border border-0 bg-transparent">
                            <i class="fa-solid fa-magnifying-glass"></i>
@@ -103,23 +105,30 @@
                         </button>
                      </nav>
                   </div>
+                  <!-- create a primary chat place for the current contact -->
                   <div class="chat_text fs_12">
-                    
-                        <div class="message_user_container my-1">
-                           <div class="message_text">weeeeeeeee</div>
-                           <div class="message_time fs_7 color_time text-end">weeee</div>
-                        </div>
-                     <div class="contact_text my-1">
+
+                     <div class="message_user_container bg_user_message my-1">
                         <div class="message_text">weeeeeeeee</div>
                         <div class="message_time fs_7 color_time text-end">weeee</div>
-
+                     </div>
+                     <div class="contact_text my-1 bg-light">
+                        <div class="message_text">weeeeeeeee</div>
+                        <div class="message_time fs_7 color_time text-end">weeee</div>
                      </div>
 
                   </div>
 
                </div>
-               <div class="input_text_zone">
-
+               <!-- create a input text for chat place -->
+               <div class="input_text_zone standard_height background_secondary d-flex ">
+                  <button class="border border-0 bg-transparent">
+                     <i class="fa-regular fa-face-smile "></i>
+                  </button>
+                  <input type="text" class="flex-grow-1 border border-0 my-1 rounded-1">
+                  <button class="border border-0 bg-transparent">
+                     <i class="fa fa-microphone" aria-hidden="true"></i>
+                  </button>
                </div>
 
             </div>

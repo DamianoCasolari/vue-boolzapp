@@ -1,6 +1,7 @@
 /* General selector  */
 body {
     font-family: 'Roboto', sans-serif;
+    min-width: 576px;
 }
 
 input[type="search"] {
@@ -22,6 +23,10 @@ input[type="search"] {
 
 }
 
+.bg_user_message {
+    background-color: var(--bz-my_message);
+}
+
 .background_secondary {
     background-color: var(--bz-secondary);
 }
@@ -39,6 +44,7 @@ input[type="search"] {
 .primary_text {
     color: var(--bz-baground1);
 }
+
 
 /* dimension zone  */
 .fs_12 {
@@ -73,6 +79,7 @@ input[type="search"] {
 .my_container {
     width: 80%;
     height: 90%;
+
 }
 
 .main_chat {
@@ -97,7 +104,7 @@ input[type="search"] {
 
 .bell_icon {
     height: 30px;
-    width: 30px;
+    aspect-ratio: 1/1;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -140,7 +147,7 @@ input[type="search"] {
 .chats_list img,
 .users_img>img {
     height: 30px;
-    width: 30px;
+    aspect-ratio: 1/1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,29 +160,29 @@ input[type="search"] {
 }
 
 
-/* -----------main section----------   */
+/* -----------main currect chat section----------   */
+
+/* top main current chat place */
 
 .chat_text {
     padding: 7% 10% 0 10%;
 }
 
-.message_user_container {
-    background-color: var(--bz-my_message);
+.message_user_container,
+.contact_text {
     padding: 6px 12px 6px 12px;
-
     border-radius: 8px;
     width: 35%;
 
-}
-
-.contact_text{
-    background-color: var(--bz-gray_light);
-    padding: 6px 12px 6px 12px;
-
-    border-radius: 8px;
-    width: 35%;
 }
 
 .message_time {
     margin-top: -5px;
+}
+
+/* bottom main chat place (input zone)  */
+
+.input_text_zone i {
+    color: var(--bz-baground1);
+    padding: 0 25px;
 }
