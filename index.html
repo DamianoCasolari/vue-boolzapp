@@ -2,110 +2,143 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue Bootzapp</title>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Vue Bootzapp</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"
-        defer></script>
-    <link rel="stylesheet" href="./assets/css/style.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"
+      defer></script>
+   <link rel="stylesheet" href="./assets/css/style.css">
 
 </head>
 
 <body>
-    <div id="app">
-        <div class="my_background d-flex justify-content-center align-items-center flex-column">
-            <main class="my_container d-flex">
-                <!-- create a container for the various chats (chat lists)  -->
-                <div class="sidebar col-4">
-                    <!-- first static block with user profile, button turn on notification and search -->
-                    <div
-                        class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
-                        <div class="users_img d-flex align-items-center">
-                            <img class="align-middle rounded-circle" src="./assets/img/avatar_io.jpg"
-                                alt="users_avatar">
-                            <div class="user_name ms-2 fs_10 fw-bold">Sofia</div>
+   <div id="app">
+      <div class="my_background d-flex justify-content-center align-items-center flex-column">
+         <main class="my_container d-flex">
+            <!-- create a container for the various chats (chat lists)  -->
+            <div class="sidebar col-4">
+               <!-- first static block with user profile, button turn on notification and search -->
+               <div
+                  class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
+                  <div class="users_img d-flex align-items-center">
+                     <img class="align-middle rounded-circle" src="./assets/img/avatar_io.jpg" alt="users_avatar">
+                     <div class="user_name ms-2 fs_10 fw-bold primary_text">Sofia</div>
+                  </div>
+                  <nav class="user_option d-flex align-items-center">
+                     <button class="border border-0 bg-transparent"><i class="fa-solid fa-circle-notch"></i></button>
+                     <button class="border border-0 bg-transparent"><i class="fa-solid fa-message"></i></button>
+                     <button class="border border-0 bg-transparent"><i
+                           class="fa-solid fa-ellipsis-vertical"></i></button>
+                  </nav>
+               </div>
+               <div class="turn_on_notifications standard_height p-2">
+                  <div class="users_img d-flex align-items-center h-100">
+
+                     <div class="bell_icon align-middle rounded-circle">
+                        <i class="fa-solid fa-bell-slash"></i>
+                     </div>
+                     <div class="info ms-2 d-flex flex-column">
+                        <div class="fs_10 fw-bold">Ricevi notifiche di nuovi messaggi</div>
+                        <a href="#" class="fs_7 text-dark">Attiva notifiche desktop</a>
+                     </div>
+                  </div>
+               </div>
+               <!-- second block with a search name in chats list  -->
+               <div class="input_container d-flex">
+                  <div class="bg-white fs_12 d-flex align-items-center px-3"><i
+                        class="fa-solid fa-magnifying-glass"></i></div>
+                  <input type="search" class="w-100" placeholder="Cerca o inizia una nuova chat"
+                     class="border border-0 fs_10">
+               </div>
+               <!-- create chats list  -->
+               <div class="chats_list p-2 d-flex justify-content-between standard_list_height"
+                  v-for="(contact,index) in contacts">
+                  <div class="chat_contact_info d-flex">
+                     <div class="img_container">
+                        <img class="h-100" :src="contact.avatar" :alt="contact.name">
+                     </div>
+                     <div class="info_chat ms-2">
+                        <div class="name_current_chat fs_12">{{contact.name}}</div>
+                        <div class="Last_message_sent fs_7 color_time">Ultimo messaggio inviato</div>
+                     </div>
+                  </div>
+                  <div class="fs_7 color_time">Orario </div>
+               </div>
+            </div>
+            <!-- create a container for main Chat  -->
+            <div class="main_chat col-8">
+
+               <div class="current_chat">
+                  <div
+                     class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
+                     <div class="users_img d-flex align-items-center">
+                        <img class="align-middle rounded-circle" src="./assets/img/avatar_io.jpg" alt="users_avatar">
+                        <div class="info_chat ms-2">
+                           <div class="name_current_chat fs_12">Michele</div>
+                           <div class="Last_message_sent fs_7 color_time">Ultimo messaggio inviato</div>
                         </div>
-                        <nav class="user_option d-flex align-items-center">
-                            <button class="border border-0 bg-transparent"><i
-                                    class="fa-solid fa-circle-notch"></i></button>
-                            <button class="border border-0 bg-transparent"><i class="fa-solid fa-message"></i></button>
-                            <button class="border border-0 bg-transparent"><i
-                                    class="fa-solid fa-ellipsis-vertical"></i></button>
-                        </nav>
-                    </div>
-                    <div class="turn_on_notifications standard_height p-2">
-                        <div class="users_img d-flex align-items-center h-100">
-
-                            <div class="bell_icon align-middle rounded-circle">
-                                <i class="fa-solid fa-bell-slash"></i>
-                            </div>
-                            <div class="info ms-2 d-flex flex-column">
-                                <div class="fs_10 fw-bold">Ricevi notifiche di nuovi messaggi</div>
-                                <a href="#" class="fs_7 text-dark">Attiva notifiche desktop</a>
-                            </div>
+                     </div>
+                     <nav class="user_option d-flex align-items-center">
+                        <button class="border border-0 bg-transparent">
+                           <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button class="border border-0 bg-transparent">
+                           <i class="fa-solid fa-paperclip"></i>
+                        </button>
+                        <button class="border border-0 bg-transparent">
+                           <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+                     </nav>
+                  </div>
+                  <div class="chat_text fs_12">
+                    
+                        <div class="message_user_container my-1">
+                           <div class="message_text">weeeeeeeee</div>
+                           <div class="message_time fs_7 color_time text-end">weeee</div>
                         </div>
-                    </div>
-                    <!-- second block with a search name in chats list  -->
-                    <div class="input_container d-flex">
-                        <div class="bg-white fs_12 d-flex align-items-center px-3"><i
-                                class="fa-solid fa-magnifying-glass"></i></div>
-                        <input type="search" class="w-100" placeholder="Cerca o inizia una nuova chat"
-                            class="border border-0 fs_10">
-                    </div>
-                    <!-- create chats list  -->
-                    <div class="chats_list p-2 d-flex justify-content-between standard_list_height" v-for="(contact,index) in contacts">
-                        <div class="chat_contact_info d-flex">
-                            <div class="img_container">
-                                <img class="h-100" :src="contact.avatar" :alt="contact.name">
-                            </div>
-                            <div class="info_chat ms-3">
-                                <div class="name_current_chat fs_12">{{contact.name}}</div>
-                                <div class="Last_message_sent fs_7 color_time">Ultimo messaggio inviato</div>
-                            </div>
-                        </div>
-                        <div class="fs_7 color_time">Orario </div>
-                    </div>
-                </div>
-                <!-- create a container for main Chat  -->
-                <div class="main_chat col-8">
+                     <div class="contact_text my-1">
+                        <div class="message_text">weeeeeeeee</div>
+                        <div class="message_time fs_7 color_time text-end">weeee</div>
 
-                    <div class="current_chat">
+                     </div>
 
-                    </div>
-                    <div class="input_text_zone">
+                  </div>
 
-                    </div>
+               </div>
+               <div class="input_text_zone">
 
-                </div>
-            </main>
-            <footer class="text-center mt-2">
-                <i class="fa fa-copyright me-2" aria-hidden="true"></i>
-                <span>Damiano Casolari</span>
-            </footer>
+               </div>
+
+            </div>
+         </main>
+         <footer class="text-center mt-2 primary_text fs_12">
+            <i class="fa fa-copyright me-2" aria-hidden="true"></i>
+            <span>Damiano Casolari</span>
+         </footer>
 
 
 
 
-        </div>
+      </div>
 
 
-    </div>
+   </div>
 
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="./assets/js/app.js"></script>
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <script src="./assets/js/app.js"></script>
 </body>
 
 </html>

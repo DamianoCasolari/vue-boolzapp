@@ -16,23 +16,28 @@ input[type="search"] {
     --bz-baground2: #DBDBD2;
     --bz-secondary: #eaeaea;
     --bz-notification: #8EDAFC;
-    --bz-my_message: #D5F9BA;
+    --bz-my_message: #d5f9ba;
     --bz-gray_icon: #b1b1b1;
     --bz-gray_light: #ffffff;
 
 }
 
 .background_secondary {
-    background-color: var(--bz-gray_light);
+    background-color: var(--bz-secondary);
 }
 
-.sidebar i {
+.sidebar i,
+.user_profile i {
     color: var(--bz-gray_icon);
     /* vertical-align: middle; */
 }
 
 .color_time {
     color: var(--bz-gray_icon);
+}
+
+.primary_text {
+    color: var(--bz-baground1);
 }
 
 /* dimension zone  */
@@ -71,7 +76,7 @@ input[type="search"] {
 }
 
 .main_chat {
-    background-color: blue;
+    background-image: url("../img/mine.jpg");
 
 }
 
@@ -107,7 +112,7 @@ input[type="search"] {
 /* input selector  */
 
 .input_container {
-    
+
     outline-color: gray;
 }
 
@@ -132,7 +137,8 @@ input[type="search"] {
 
 /* different chats */
 
-.chats_list img, .users_img>img {
+.chats_list img,
+.users_img>img {
     height: 30px;
     width: 30px;
     display: flex;
@@ -142,8 +148,34 @@ input[type="search"] {
 }
 
 .chats_list {
-     border-bottom: 1px solid var(--bz-secondary);
-     background-color: var(--bz-gray_light);
+    border-bottom: 1px solid var(--bz-secondary);
+    background-color: var(--bz-gray_light);
 }
 
 
+/* -----------main section----------   */
+
+.chat_text {
+    padding: 7% 10% 0 10%;
+}
+
+.message_user_container {
+    background-color: var(--bz-my_message);
+    padding: 6px 12px 6px 12px;
+
+    border-radius: 8px;
+    width: 35%;
+
+}
+
+.contact_text{
+    background-color: var(--bz-gray_light);
+    padding: 6px 12px 6px 12px;
+
+    border-radius: 8px;
+    width: 35%;
+}
+
+.message_time {
+    margin-top: -5px;
+}
