@@ -1,4 +1,35 @@
+/* General selector  */
+
 body {
     font-family: 'Roboto', sans-serif;
 }
 
+/* Utility selector  */
+
+:root {
+    --bz-baground1 : #009688;
+    --bz-baground2 : #DBDBD2;
+    --bz-secondary : #EAEAEA;
+    --bz-notification : #8EDAFC;
+    --bz-my_message : #D5F9BA;
+}
+
+
+/* Container selctor  */
+
+.my_background {
+    height: 100vh;
+    background: linear-gradient(180deg, var(--bz-baground1) 10%, var(--bz-baground2) 10%);
+
+}
+
+.my_container {
+    background-color: blue;
+    width: 80%;
+    height: 90%;
+}
+
+.contact_list {
+    background-color: green;
+
+}
