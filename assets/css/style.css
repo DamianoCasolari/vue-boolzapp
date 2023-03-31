@@ -1,5 +1,4 @@
 /* General selector  */
-
 body {
     font-family: 'Roboto', sans-serif;
 }
@@ -11,6 +10,7 @@ input[type="search"] {
 
 /* Utility selector  */
 
+/* color zone  */
 :root {
     --bz-baground1: #009688;
     --bz-baground2: #DBDBD2;
@@ -18,15 +18,44 @@ input[type="search"] {
     --bz-notification: #8EDAFC;
     --bz-my_message: #D5F9BA;
     --bz-gray_icon: #b1b1b1;
+    --bz-gray_light: #ffffff;
+
+}
+
+.background_secondary {
+    background-color: var(--bz-gray_light);
+}
+
+.sidebar i {
+    color: var(--bz-gray_icon);
+    /* vertical-align: middle; */
+}
+
+.color_time {
+    color: var(--bz-gray_icon);
+}
+
+/* dimension zone  */
+.fs_12 {
+    font-size: 12px;
+}
+
+.fs_10 {
+    font-size: 10px;
+}
+
+.fs_7 {
+    font-size: 7px;
 }
 
 .standard_height {
     height: 40px;
 }
 
-.background_secondary {
-    background-color: var(--bz-secondary);
+.standard_list_height {
+    height: 50px;
 }
+
 
 /* Container selctor  */
 
@@ -37,24 +66,84 @@ input[type="search"] {
 }
 
 .my_container {
-    background-color: blue;
     width: 80%;
     height: 90%;
 }
 
-.contact_list {
-    background-color: green;
+.main_chat {
+    background-color: blue;
+
+}
+
+.sidebar {
+    background-color: var(--bz-gray_light);
 
 }
 
 
-.contact_list i {
-    color: var(--bz-gray_icon);
-    /* vertical-align: middle; */
+/* --------------Chats list selector ---------------- */
+
+
+/* sound notification  */
+
+.turn_on_notifications {
+    background-color: var(--bz-notification);
 }
 
-/* Chats list selector  */
-
-.users_img>img {
-    height: 80%;
+.bell_icon {
+    height: 30px;
+    width: 30px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.bell_icon>i {
+    color: var(--bz-notification);
+}
+
+
+/* input selector  */
+
+.input_container {
+    
+    outline-color: gray;
+}
+
+.sidebar input[type="search"]::-webkit-input-placeholder {
+    color: #999;
+    font-size: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+
+}
+
+.sidebar input[type="search"]::placeholder {
+    color: #999;
+    font-size: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* different chats */
+
+.chats_list img, .users_img>img {
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.chats_list {
+     border-bottom: 1px solid var(--bz-secondary);
+     background-color: var(--bz-gray_light);
+}
+
+

@@ -29,12 +29,14 @@
         <div class="my_background d-flex justify-content-center align-items-center flex-column">
             <main class="my_container d-flex">
                 <!-- create a container for the various chats (chat lists)  -->
-                <div class="contact_list col-4">
+                <div class="sidebar col-4">
                     <!-- first static block with user profile, button turn on notification and search -->
-                    <div class="user_profile standard_height d-flex justify-content-between align-items-center p-1 background_secondary">
-                        <div class="users_img d-flex align-items-center h-100">
-                            <img class="align-middle rounded-circle" src="./assets/img/avatar_io.jpg" alt="users_avatar">
-                            <div class="user_name ms-2 fs-6">Sofia</div>
+                    <div
+                        class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
+                        <div class="users_img d-flex align-items-center">
+                            <img class="align-middle rounded-circle" src="./assets/img/avatar_io.jpg"
+                                alt="users_avatar">
+                            <div class="user_name ms-2 fs_10 fw-bold">Sofia</div>
                         </div>
                         <nav class="user_option d-flex align-items-center">
                             <button class="border border-0 bg-transparent"><i
@@ -44,15 +46,38 @@
                                     class="fa-solid fa-ellipsis-vertical"></i></button>
                         </nav>
                     </div>
-                    <div class="turn_on_notifications">
+                    <div class="turn_on_notifications standard_height p-2">
+                        <div class="users_img d-flex align-items-center h-100">
 
+                            <div class="bell_icon align-middle rounded-circle">
+                                <i class="fa-solid fa-bell-slash"></i>
+                            </div>
+                            <div class="info ms-2 d-flex flex-column">
+                                <div class="fs_10 fw-bold">Ricevi notifiche di nuovi messaggi</div>
+                                <a href="#" class="fs_7 text-dark">Attiva notifiche desktop</a>
+                            </div>
+                        </div>
                     </div>
-                    <input type="search" class="w-100" class="border border-0">
-
                     <!-- second block with a search name in chats list  -->
-                    <ul class="">
-                        <li class="list-unstyled"> </li>
-                    </ul>
+                    <div class="input_container d-flex">
+                        <div class="bg-white fs_12 d-flex align-items-center px-3"><i
+                                class="fa-solid fa-magnifying-glass"></i></div>
+                        <input type="search" class="w-100" placeholder="Cerca o inizia una nuova chat"
+                            class="border border-0 fs_10">
+                    </div>
+                    <!-- create chats list  -->
+                    <div class="chats_list p-2 d-flex justify-content-between standard_list_height" v-for="(contact,index) in contacts">
+                        <div class="chat_contact_info d-flex">
+                            <div class="img_container">
+                                <img class="h-100" :src="contact.avatar" :alt="contact.name">
+                            </div>
+                            <div class="info_chat ms-3">
+                                <div class="name_current_chat fs_12">{{contact.name}}</div>
+                                <div class="Last_message_sent fs_7 color_time">Ultimo messaggio inviato</div>
+                            </div>
+                        </div>
+                        <div class="fs_7 color_time">Orario </div>
+                    </div>
                 </div>
                 <!-- create a container for main Chat  -->
                 <div class="main_chat col-8">
