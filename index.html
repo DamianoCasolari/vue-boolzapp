@@ -35,7 +35,7 @@
                   class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
                   <div class="users_img d-flex align-items-center">
                      <img class="align-middle rounded-circle" src="./assets/img/avatar_io.jpg" alt="users_avatar">
-                     <div class="user_name ms-2 fs_10 fw-bold primary_text">Sofia</div>
+                     <div class="user_name ms-2 fs_12 fw-bold primary_text">Sofia</div>
                   </div>
                   <nav class="user_option d-flex align-items-center">
                      <button class="border border-0 bg-transparent"><i class="fa-solid fa-circle-notch"></i></button>
@@ -45,38 +45,42 @@
                   </nav>
                </div>
                <!-- add notification banner  -->
-               <div class="turn_on_notifications standard_height p-2">
+               <div class="turn_on_notifications standard_height p-2 overflow-hidden">
                   <div class="users_img d-flex align-items-center h-100">
 
                      <div class="bell_icon align-middle rounded-circle">
                         <i class="fa-solid fa-bell-slash"></i>
                      </div>
                      <div class="info ms-2 d-flex flex-column">
-                        <div class="fs_10 fw-bold">Ricevi notifiche di nuovi messaggi</div>
-                        <a href="#" class="fs_7 text-dark">Attiva notifiche desktop</a>
+                        <div class="fs_9 fw-bold">Ricevi notifiche di nuovi messaggi</div>
+                        <a href="#" class="fs_7 primary_text">Attiva notifiche desktop</a>
                      </div>
                   </div>
                </div>
                <!-- second block with a search name in chats list  -->
-               <div class="input_container d-flex">
+               <div class="input_container d-flex align-items-center">
                   <div class="bg-white fs_12 d-flex align-items-center px-3"><i
-                        class="fa-solid fa-magnifying-glass"></i></div>
+                        class="fa-xs fa-solid fa-magnifying-glass mt-1"></i>
+                  </div>
                   <input type="search" class="w-100" placeholder="Cerca o inizia una nuova chat"
                      class="border border-0 fs_10">
                </div>
                <!-- create chats list  -->
-               <div class="chats_list p-2 d-flex justify-content-between standard_list_height c_pointer"
-                  v-for="(contact,index) in contacts">
+               <div class="chats_list p-2 d-flex justify-content-between standard_list_height c_pointer overflow-hidden"
+                  v-for="(contact,index) in contacts" @click="changeCurrentIndex(index)">
+
                   <div class="chat_contact_info d-flex">
                      <div class="img_container">
                         <img class="h-100" :src="contact.avatar" :alt="contact.name">
                      </div>
                      <div class="info_chat ms-2">
-                        <div class="name_current_chat fs_12">{{contact.name}}</div>
-                        <div class="Last_message_sent fs_7 color_time">Ultimo messaggio inviato</div>
+                        <div class="name_current_chat fs_12 text-break">{{contact.name}}</div>
+                        <div class="Last_message_sent fs_7 color_time text-break">
+                           {{contact.messages[contact.messages.length -
+                           1].message}}</div>
                      </div>
                   </div>
-                  <div class="fs_7 color_time">Orario </div>
+                  <div class="fs_7 color_time">{{extract_time(index)}} </div>
                </div>
             </div>
             <!-- create a container for main Chat  -->
@@ -86,10 +90,12 @@
                   <div
                      class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
                      <div class="users_img d-flex align-items-center">
-                        <img class="align-middle rounded-circle" src="./assets/img/avatar_io.jpg" alt="users_avatar">
+                        <img class="align-middle rounded-circle" :src="contacts[currentIndex].avatar"
+                           alt="users_avatar">
                         <div class="info_chat ms-2">
-                           <div class="name_current_chat fs_12">Michele</div>
-                           <div class="Last_message_sent fs_7 color_time">Ultimo messaggio inviato</div>
+                           <div class="name_current_chat fs_12 text-break">{{contacts[currentIndex].name}}</div>
+                           <div class="Last_message_sent fs_7 color_time">{{'Ultimo accesso alle ' +
+                              only_time(currentIndex)}} </div>
                         </div>
                      </div>
                      <!-- create nav bar current contact  -->
@@ -106,17 +112,23 @@
                      </nav>
                   </div>
                   <!-- create a primary chat place for the current contact -->
-                  <div class="chat_text fs_12">
+                  <div class="chat_text">
+                     <div class="container_messages fs_12" v-for="(message,index) in contacts[currentIndex].messages">
+                        <!-- create template to user message  -->
+                        <div class="magic date"></div>
+                        <div class="position_messagge d-flex justify-content-end" v-if="message.status == 'sent'">
+                           <div class="user_message_container bg_user_message my-1">
+                              <div class="message_text text-break">{{message.message}}</div>
+                              <div class="message_time fs_7 color_time text-end">{{only_time(index)}}</div>
+                           </div>
+                        </div>
+                        <!-- create template to other contact message  -->
 
-                     <div class="message_user_container bg_user_message my-1">
-                        <div class="message_text">weeeeeeeee</div>
-                        <div class="message_time fs_7 color_time text-end">weeee</div>
+                        <div class="contact_text my-1 bg-light" v-else>
+                           <div class="message_text text-break">{{message.message}}</div>
+                           <div class="message_time fs_7 color_time text-end">{{only_time(index)}}</div>
+                        </div>
                      </div>
-                     <div class="contact_text my-1 bg-light">
-                        <div class="message_text">weeeeeeeee</div>
-                        <div class="message_time fs_7 color_time text-end">weeee</div>
-                     </div>
-
                   </div>
 
                </div>
@@ -133,17 +145,11 @@
 
             </div>
          </main>
-         <footer class="text-center mt-2 primary_text fs_12">
-            <i class="fa fa-copyright me-2" aria-hidden="true"></i>
-            <span>Damiano Casolari</span>
-         </footer>
-
-
-
-
       </div>
-
-
+      <footer class="text-center primary_text fs_12 standard_height">
+         <i class="fa fa-copyright me-2" aria-hidden="true"></i>
+         <span>Damiano Casolari</span>
+      </footer>
    </div>
 
    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

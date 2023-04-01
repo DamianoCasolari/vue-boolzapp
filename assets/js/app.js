@@ -12,17 +12,17 @@ createApp({
                     visible: true,
                     messages: [
                         {
-                            date: '10/01/2020 15:30:55',
+                            date: '03/04/2023 15:30:55',
                             message: 'Hai portato a spasso il cane?',
                             status: 'sent'
                         },
                         {
-                            date: '10/01/2020 15:50:00',
+                            date: '03/04/2023 15:50:00',
                             message: 'Ricordati di stendere i panni',
                             status: 'sent'
                         },
                         {
-                            date: '10/01/2020 16:15:22',
+                            date: '03/04/2023 16:15:22',
                             message: 'Tutto fatto!',
                             status: 'received'
                         }
@@ -168,13 +168,46 @@ createApp({
                     ],
                 }
             ],
-          currentIndex : -1,  
+            currentIndex: 0,
+            dateToday: "",
         }
     },
     methods: {
-    }
-      
-      
+        createDateToday() {
+            const today = new Date();
+            const day = today.getDate().toString().padStart(2, '0')
+            const month = (today.getMonth() + 1).toString().padStart(2, '0')
+            const year = today.getFullYear().toString()
+            this.dateToday = `${day}/${month}/${year}`
+
+            console.log(this.dateToday);
+        },
+
+        extract_time(index) {
+            const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
+            if (this.dateToday == date) {
+                return (time.slice(0, -3))
+            } else {
+                return date
+            }
+        },
+        only_time(index) {
+            const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
+                return (time.slice(0, -3))
+        },
+        changeCurrentIndex(index) {
+            this.currentIndex = index;
+            console.log(this.currentIndex);
+        }
+    },
+    mounted() {
+        this.createDateToday()
+    },
+
 }).mount('#app')
+
+
+
+throw new Error("Segui il coniglio bianco");
 
 
