@@ -170,6 +170,8 @@ createApp({
             ],
             currentIndex: 0,
             dateToday: "",
+            timeToday: "",
+            msg: "",
         }
     },
     methods: {
@@ -182,8 +184,14 @@ createApp({
 
             console.log(this.dateToday);
         },
+        createCurrentTime() {
+            const today = new Date()
+            const hours = today.getHours()
+            const minutes = today.getMinutes()
+            this.timeToday = hours + ":" + minutes
+        },
 
-        extract_time(index) {
+        extract_time_or_date(index) {
             const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
             if (this.dateToday == date) {
                 return (time.slice(0, -3))
@@ -193,15 +201,25 @@ createApp({
         },
         only_time(index) {
             const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
-                return (time.slice(0, -3))
+            return (time.slice(0, -3))
         },
         changeCurrentIndex(index) {
             this.currentIndex = index;
             console.log(this.currentIndex);
-        }
+        },
+        // createNewMessage(){
+        //    return ` <div class="position_messagge d-flex justify-content-end" v-if="message.status == 'sent'">
+        //    <div class="user_message_container bg_user_message my-1">
+        //       <div class="message_text text-break">{{msg}}</div>
+        //       <div class="message_time fs_7 color_time text-end">{{this.timeToday}}</div>
+        //    </div>
+        // </div>`
+        // }
     },
     mounted() {
         this.createDateToday()
+        this.createCurrentTime()
+        console.log(this.timeToday);
     },
 
 }).mount('#app')

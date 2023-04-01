@@ -30,7 +30,7 @@
          <main class="my_container d-flex">
             <!-- create a container for the various chats (chat lists)  -->
             <div class="sidebar col-4">
-               <!-- first static block with user profile, button turn on notification and search -->
+               <!--  user profile plus navbar -->
                <div
                   class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
                   <div class="users_img d-flex align-items-center">
@@ -57,7 +57,7 @@
                      </div>
                   </div>
                </div>
-               <!-- second block with a search name in chats list  -->
+               <!-- search name in chats list  -->
                <div class="input_container d-flex align-items-center">
                   <div class="bg-white fs_12 d-flex align-items-center px-3"><i
                         class="fa-xs fa-solid fa-magnifying-glass mt-1"></i>
@@ -80,7 +80,7 @@
                            1].message}}</div>
                      </div>
                   </div>
-                  <div class="fs_7 color_time">{{extract_time(index)}} </div>
+                  <div class="fs_7 color_time">{{extract_time_or_date(index)}} </div>
                </div>
             </div>
             <!-- create a container for main Chat  -->
@@ -98,7 +98,7 @@
                               only_time(currentIndex)}} </div>
                         </div>
                      </div>
-                     <!-- create nav bar current contact  -->
+                     <!-- create navbar current contact  -->
                      <nav class="user_option d-flex align-items-center">
                         <button class="border border-0 bg-transparent">
                            <i class="fa-solid fa-magnifying-glass"></i>
@@ -115,7 +115,7 @@
                   <div class="chat_text">
                      <div class="container_messages fs_12" v-for="(message,index) in contacts[currentIndex].messages">
                         <!-- create template to user message  -->
-                        <div class="magic date"></div>
+                        <!-- <div class="magic date"></div> -->
                         <div class="position_messagge d-flex justify-content-end" v-if="message.status == 'sent'">
                            <div class="user_message_container bg_user_message my-1">
                               <div class="message_text text-break">{{message.message}}</div>
@@ -137,12 +137,11 @@
                   <button class="border border-0 bg-transparent">
                      <i class="fa-regular fa-face-smile "></i>
                   </button>
-                  <input type="text" class="flex-grow-1 my-1 rounded-1">
+                  <input type="text" class="chat_input flex-grow-1 my-1 rounded-1" v-model="msg" @keyup.enter="">
                   <button class="border border-0 bg-transparent">
                      <i class="fa fa-microphone" aria-hidden="true"></i>
                   </button>
                </div>
-
             </div>
          </main>
       </div>
