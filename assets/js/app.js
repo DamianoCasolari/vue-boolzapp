@@ -179,7 +179,9 @@ createApp({
             light: true,
             randomAnswers: [
                 "Certo!", "Mi dispiace non riesco", "Ci penso dai", "Per sta volta va bene ma sei in debito..", "Ti richiamo dopo ora sto facendo coding", "Non sono convinto", "Venerdì ti porto tutto", "Vedila così, sei in ritardo solo se rimandi a domani"
-            ]
+            ],
+            NewNameContact: "",
+            NewAvatarLink: "",
         }
     },
     methods: {
@@ -305,6 +307,21 @@ createApp({
         deleteChat(index){
             this.contacts.splice(index,1)
             this.arrayContactsArchive.splice(index,1)
+        },
+        addContact(){
+            let newContact =   {
+                name: this.NewNameContact,
+                avatar: this.NewAvatarLink,
+                visible: true,
+                messages: [
+                ]
+            }
+
+            this.contacts.unshift(newContact)
+            this.NewNameContact = ""
+            this.NewAvatarLink = ""
+            const btnClose = document.querySelector(".btn-close")
+            btnClose.click()
         }
     },
     created() {

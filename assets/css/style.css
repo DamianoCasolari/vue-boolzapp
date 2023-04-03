@@ -97,7 +97,9 @@ button i:hover, div i:hover {
     cursor: pointer;
 }
 
-
+.rb_rounded {
+    border-radius: 0 30px 30px 0;
+}
 /* Container selctor  */
 
 .my_background {

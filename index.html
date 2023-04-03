@@ -34,10 +34,10 @@
          <div class="position-fixed text-light top-0 end-0 m-3 c_pointer" v-if="light" @click="changeLayout()"><i
                class="fa-solid fa-moon fa-xl"></i>
          </div>
-         <div class="position-fixed text-light top-0 start-0 m-3 c_pointer" @click="addContact()"
+         <div class="position-fixed text-light top-0 start-0 m-3 c_pointer"
             data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"><i class="fa-solid fa-plus fa-xl"></i>
          </div>
-         <div class="offcanvas offcanvas-start w-25 p-2" data-bs-scroll="true" tabindex="-1"
+         <div class="offcanvas offcanvas-start w-25 p-2 rb_rounded" data-bs-scroll="true" tabindex="-1"
             id="offcanvasWithBothOptions">
             <div class="offcanvas-header">
                <div id="offcanvasWithBothOptionsLabel">Nuovo contatto</div>
@@ -47,12 +47,12 @@
             <div class="offcanvas-body d-flex flex-column align-items-center p-1">
                <form action="">
                   <label for="newName" class="col-form-label fs_12 ">Nome</label>
-                  <input id="newName" class="input-group border border-2 m-1" type="text" v-model="nameNewContact" autofocus>
+                  <input id="newName" class="input-group border border-2 m-1" type="text" v-model="NewNameContact"> <!-- autofocus non funziona mai-->
                   <label for="newAvatar" class="col-form-label fs_12 ">Link immagine profilo</label>
                   <input id="newAvatar" class="input-group border border-2 m-1 text-start" type="text"
-                     v-model="linkNewAvatar">
+                     v-model="NewAvatarLink">
                   <button
-                     class=" rounded-pill background_primary bordre border-0 fs_12 m-2 py-2 px-4 text-white" @click.prevent="">Aggiungi
+                     class=" rounded-pill background_primary bordre border-0 fs_12 m-2 py-2 px-4 text-white" @click.prevent="addContact()">Aggiungi
                      nuovo contatto</button>
                </form>
             </div>
