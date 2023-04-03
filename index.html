@@ -81,7 +81,7 @@
                            1].message}}</div>
                      </div>
                   </div>
-                  <div class="fs_7 color_time">{{extract_date(index)}} </div>
+                  <div class="fs_7 color_time">{{extractLastDate(index)}} </div>
                </div>
             </div>
             <!-- create a container for main Chat  -->
@@ -96,8 +96,8 @@
                         <div class="info_chat ms-2">
                            <div class="name_current_chat fs_12 text-break">{{contacts[currentIndex].name}}</div>
                            <div class="Last_message_sent fs_7 color_time">{{'Ultimo accesso ' +
-                              extract_date(currentIndex) + ' alle ' +
-                              extract_time(currentIndex)}} </div>
+                              extractLastDate(currentIndex) + ' alle ' +
+                              extractLastTime(currentIndex)}} </div>
                         </div>
                      </div>
                      <!-- create navbar current contact  -->
@@ -140,7 +140,7 @@
                      <i class="fa-regular fa-face-smile "></i>
                   </button>
                   <input type="text" class="chat_input flex-grow-1 my-1 rounded-1" v-model="msg" @keyup.enter="createNewMessage(currentIndex)"
-                     autofocus> <!--perchè autofocus non funziona?-->
+                     autofocus>
                   <button class="border border-0 bg-transparent">
                      <i class="fa fa-microphone" aria-hidden="true"></i>
                   </button>

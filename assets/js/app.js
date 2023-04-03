@@ -193,19 +193,27 @@ createApp({
             this.timeToday = hours + ":" + minutes
         },
 
-        extract_date(index) {
+        extractLastDate(index) {
             const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
             return date
+
+        },
+        extractLastTime(index) {
+            const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
+            if (time.length > 5) {
+                return (time.slice(0, -3))
+            } else {
+                return time
+
+            }
 
         },
         extract_time(index) {
             const [date, time] = this.contacts[this.currentIndex].messages[index].date.split(" ")
             if (time.length > 5) {
                 return (time.slice(0, -3))
-                console.log(time,index);
             } else {
                 return time
-                console.log(time,index);
 
             }
         },
