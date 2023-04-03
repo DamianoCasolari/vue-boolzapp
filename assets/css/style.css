@@ -114,7 +114,7 @@ button i:hover {
 
 .chats_container {
     height: calc(100% - 106px);
-    overflow: auto;
+    overflow: hidden;
 }
 
 .chat_text {
@@ -184,8 +184,13 @@ button i:hover {
     visibility: hidden;
     transition: opacity 0.3s ease-in-out;
 }
-.chat_text:hover::-webkit-scrollbar-thumb,.chats_container:hover::-webkit-scrollbar-thumb  {
+.chat_text:hover::-webkit-scrollbar-thumb {
     visibility: visible;
+}
+
+.chats_container:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+    overflow: auto;
 }
 
 
