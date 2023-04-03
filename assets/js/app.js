@@ -164,9 +164,9 @@ createApp({
                             date: '10/01/2020 15:51:00',
                             message: 'OK!!',
                             status: 'received'
-                        }
+                        },
                     ],
-                }
+                },
             ],
             currentIndex: 0,
             dateToday: "",
@@ -174,6 +174,8 @@ createApp({
             msg: "",
             messageArchive: [
             ],
+            searchInput : "",
+            arraySearchConatcts : []
         }
     },
     methods: {
@@ -245,7 +247,6 @@ createApp({
             });
             this.msg = '';
             this.automaticAnswer(index)
-            // perchè mi cambia l'orario ?
         },
         automaticAnswer(index) {
             setTimeout(() => {
@@ -256,11 +257,17 @@ createApp({
                 });
             }, 1000)
         },
+        functionSearch(){
+            const newFilterArray = this.contacts.filter((object) => object.name.toLowerCase().includes(this.searchInput))
+            console.log(this.searchInput);
+            this.arraySearchConatcts = newFilterArray
+            console.log(newFilterArray);
+            
+        }
     },
     created() {
         this.createDateToday()
         this.createCurrentTime()
-        console.log(this.timeToday)
     },
 
 }).mount('#app')

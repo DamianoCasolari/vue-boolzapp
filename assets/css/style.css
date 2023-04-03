@@ -97,14 +97,33 @@ button i:hover {
 
 }
 
+.sidebar {
+    background-color: var(--bz-gray_light);
+
+}
+
 .main_chat {
     background-image: url("../img/mine.jpg");
 
 }
 
-.sidebar {
-    background-color: var(--bz-gray_light);
+.current_chat {
+    height: calc(100% - 40px);
 
+}
+
+.chats_container {
+    height: calc(100% - 106px);
+    overflow: auto;
+}
+
+.chat_text {
+    height: calc(100% - 40px);
+    overflow: auto;
+}
+
+.chats_container:hover {
+    overflow: auto;
 }
 
 
@@ -151,6 +170,23 @@ button i:hover {
     padding-left: 10px;
 }
 
+/* customization scrollbar  */
+
+::-webkit-scrollbar {
+    width: 3px;
+    height: 10%;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #aaaaaac7;
+    border-radius: 4px;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+}
+.chat_text:hover::-webkit-scrollbar-thumb,.chats_container:hover::-webkit-scrollbar-thumb  {
+    visibility: visible;
+}
 
 
 /* different chats */
