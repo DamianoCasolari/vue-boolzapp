@@ -26,9 +26,12 @@
 
 <body>
    <div id="app">
-      <div class="my_background d-flex justify-content-end align-items-center flex-column" :class="light ? '' : 'dark_layout' ">
-         <div class="position-fixed text-light top-0 end-0 m-3 c_pointer" v-if="!light" @click="changeLayout()"><i class="fa-solid fa-sun fa-xl"></i></div>
-         <div class="position-fixed text-light top-0 end-0 m-3 c_pointer" v-if="light"  @click="changeLayout()"><i class="fa-solid fa-moon fa-xl"></i></div>
+      <div class="my_background d-flex justify-content-end align-items-center flex-column"
+         :class="light ? '' : 'dark_layout' ">
+         <div class="position-fixed text-light top-0 end-0 m-3 c_pointer" v-if="!light" @click="changeLayout()"><i
+               class="fa-solid fa-sun fa-xl"></i></div>
+         <div class="position-fixed text-light top-0 end-0 m-3 c_pointer" v-if="light" @click="changeLayout()"><i
+               class="fa-solid fa-moon fa-xl"></i></div>
          <main class="my_container d-flex">
             <!-- create a container for the various chats (chat lists)  -->
             <div class="sidebar col-4 h-100">
@@ -100,10 +103,10 @@
                            alt="users_avatar">
                         <div class="info_chat ms-2">
                            <div class="name_current_chat fs_12 text-break">{{contacts[currentIndex].name}}</div>
-                           <div class="Last_message_sent fs_7 color_time" v-if="this.contacts[currentIndex].messages.length > 0">{{'Ultimo accesso ' +
-                              extractLastDate(currentIndex) + ' alle ' +
-                              extractLastTime(currentIndex)}} </div>
+                           <div class="Last_message_sent fs_7 color_time"
+                              v-if="this.contacts[currentIndex].messages.length > 0">{{this.isWriting()}} </div>
                         </div>
+                        <!-- this.isWriting() -->
                      </div>
                      <!-- create navbar current contact  -->
                      <nav class="user_option d-flex align-items-center">
@@ -113,9 +116,18 @@
                         <button class="border border-0 bg-transparent">
                            <i class="fa-solid fa-paperclip"></i>
                         </button>
-                        <button class="border border-0 bg-transparent">
+                        <button class="border border-0 bg-transparent" data-bs-toggle="dropdown">
                            <i class="fa-solid fa-ellipsis-vertical"></i>
                         </button>
+                        <ul class="dropdown-menu">
+                           <li>
+                              <div class="dropdown-item c_pointer" @click="deleteAllMessages()">Delete all messages
+                              </div>
+                           </li>
+                           <li>
+                              <div class="dropdown-item c_pointer" @click="deleteChat(this.currentIndex)">Delete chat</div>
+                           </li>
+                        </ul>
                      </nav>
                   </div>
                   <!-- create a primary chat place for the current contact -->
@@ -125,29 +137,36 @@
                         <!-- <div class="magic date"></div> -->
                         <div class="position_messagge d-flex justify-content-end dropdown"
                            v-if="message.status == 'sent'">
-                           <div class="user_message_container my-1 position-relative" :class="light ? 'bg_user_message' : 'bg_dark_messages'">
-                              <div class="message_text text-break">{{message.message}}</div>
+                           <div class="user_message_container my-1 position-relative"
+                              :class="light ? 'bg_user_message' : 'bg_dark_messages'">
+                              <div class="message_text text-break me-1">{{message.message}}</div>
                               <div class="message_time fs_7 color_time text-end">{{extractTime(index)}}</div>
                               <div class="arrow_delete position-absolute" data-bs-toggle="dropdown">
                                  <i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i>
                               </div>
                               <ul class="dropdown-menu">
                                  <li><a class="dropdown-item" href="#">Message Info</a></li>
-                                 <li><div class="dropdown-item c_pointer" @click="deleteMessage(index)">Delete message</div></li>
-                              </ul> 
+                                 <li>
+                                    <div class="dropdown-item c_pointer" @click="deleteMessage(index)">Delete message
+                                    </div>
+                                 </li>
+                              </ul>
                            </div>
                         </div>
                         <!-- create template to other contact message  -->
 
-                        <div class="contact_text my-1 position-relative" :class="light ? 'bg-light ' : 'bg_dark_messages'" data-bs-toggle="dropdown" v-else>
-                           <div class="message_text text-break">{{message.message}}</div>
+                        <div class="contact_text my-1 position-relative"
+                           :class="light ? 'bg-light ' : 'bg_dark_messages'" data-bs-toggle="dropdown" v-else>
+                           <div class="message_text text-break me-1">{{message.message}}</div>
                            <div class="message_time fs_7 color_time text-end">{{extractTime(index)}}</div>
                            <div class="arrow_delete position-absolute">
                               <i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i>
                            </div>
                            <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="#">Message Info</a></li>
-                              <li><div class="dropdown-item c_pointer" @click="deleteMessage(index)">Delete message</div></li>
+                              <li>
+                                 <div class="dropdown-item c_pointer" @click="deleteMessage(index)">Delete message</div>
+                              </li>
                            </ul>
                         </div>
                      </div>
@@ -171,7 +190,8 @@
             </div>
          </main>
       </div>
-      <footer class="primary_text fs_12 standard_height d-flex align-items-center justify-content-center " :class="light ? '' : 'dark_layout' ">
+      <footer class="primary_text fs_12 standard_height d-flex align-items-center justify-content-center "
+         :class="light ? '' : 'dark_layout' ">
          <i class="fa fa-copyright me-2" aria-hidden="true"></i>
          <span>Damiano Casolari</span>
       </footer>

@@ -177,7 +177,9 @@ createApp({
             currentIndexMessage: 0,
             messageArchive: [],
             light: true,
-
+            randomAnswers: [
+                "Certo!", "Mi dispiace non riesco", "Ci penso dai", "Per sta volta va bene ma sei in debito..", "Ti richiamo dopo ora sto facendo coding", "Non sono convinto", "Venerdì ti porto tutto", "Vedila così, sei in ritardo solo se rimandi a domani"
+            ]
         }
     },
     methods: {
@@ -247,13 +249,14 @@ createApp({
         },
         createNewMessage(index) {
             if (this.msg.trim().length > 0) {
-            this.contacts[index].messages.push({
-                date: this.dateToday + " " + this.timeToday,
-                message: this.msg,
-                status: 'sent'
-            });
-            this.msg = '';
-            this.automaticAnswer(index) }
+                this.contacts[index].messages.push({
+                    date: this.dateToday + " " + this.timeToday,
+                    message: this.msg,
+                    status: 'sent'
+                });
+                this.msg = '';
+                this.automaticAnswer(index)
+            }
             else {
                 return
             }
@@ -262,10 +265,24 @@ createApp({
             setTimeout(() => {
                 this.contacts[index].messages.push({
                     date: this.dateToday + " " + this.timeToday,
-                    message: "ok",
+                    message: this.randomAnswers[Math.floor(Math.random() * 8)],
                     status: 'received'
                 });
             }, 1000)
+        },
+        automaticOnline() {
+
+        },
+        isWriting() {
+            if (this.contacts[this.currentIndex].messages[this.contacts[this.currentIndex].messages.length - 1].status == 'sent') {
+                return "Sta scrivendo..."
+            } else {
+
+                return 'Ultimo accesso ' +
+                    this.extractLastDate(this.currentIndex) + ' alle ' +
+                    this.extractLastTime(this.currentIndex)
+
+            }
         },
         functionSearch() {
             const newFilterArray = this.arrayContactsArchive.filter((object) => object.name.toLowerCase().includes(this.searchInput))
@@ -277,17 +294,23 @@ createApp({
         deleteMessage(index) {
             if (this.contacts[this.currentIndex].messages[index]) {
                 this.contacts[this.currentIndex].messages.splice(index, 1)
-                console.log(index);
             }
         },
         changeLayout() {
             this.light = !this.light;
+        },
+        deleteAllMessages(){
+            this.contacts[this.currentIndex].messages = [];
+        },
+        deleteChat(index){
+            this.contacts.splice(index,1)
         }
     },
     created() {
         this.createDateToday()
         this.createCurrentTime()
         this.saveContacts()
+        console.log(this.contacts[this.currentIndex].messages[this.contacts[this.currentIndex].messages.length - 1].status);
     },
 
 }).mount('#app')
