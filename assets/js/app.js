@@ -172,6 +172,8 @@ createApp({
             dateToday: "",
             timeToday: "",
             msg: "",
+            messageArchive: [
+            ],
         }
     },
     methods: {
@@ -186,40 +188,54 @@ createApp({
         },
         createCurrentTime() {
             const today = new Date()
-            const hours = today.getHours()
-            const minutes = today.getMinutes()
+            const hours = today.getHours().toString().padStart(2, '0')
+            const minutes = today.getMinutes().toString().padStart(2, '0')
             this.timeToday = hours + ":" + minutes
         },
 
-        extract_time_or_date(index) {
+        extract_date(index) {
             const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
-            if (this.dateToday == date) {
-                return (time.slice(0, -3))
-            } else {
-                return date
-            }
+            return date
+
         },
-        only_time(index) {
+        extract_time(index) {
             const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
             return (time.slice(0, -3))
         },
         changeCurrentIndex(index) {
+            this.toSaveMsg()
+            this.msg = ""
             this.currentIndex = index;
-            console.log(this.currentIndex);
+            this.checkArchiveMessage()
         },
-        // createNewMessage(){
-        //    return ` <div class="position_messagge d-flex justify-content-end" v-if="message.status == 'sent'">
-        //    <div class="user_message_container bg_user_message my-1">
-        //       <div class="message_text text-break">{{msg}}</div>
-        //       <div class="message_time fs_7 color_time text-end">{{this.timeToday}}</div>
-        //    </div>
-        // </div>`
-        // }
+        toSaveMsg() {
+            const savedInputText = this.msg
+            const messageIndex = this.currentIndex
+            this.messageArchive.push({ message: savedInputText, index: messageIndex });
+            console.log(this.messageArchive);
+        },
+        checkArchiveMessage() {
+            const currentMessage = this.messageArchive.find((obj) => obj.index === this.currentIndex);
+            // const currentMessage = this.messageArchive.filter((object) => object.index == this.currentIndex);  perchè il filter non gli piace?
+            if (currentMessage) {
+                this.msg = currentMessage.message;
+            } 
+            this.messageArchive = this.messageArchive.filter((object) => object.index !== this.currentIndex)
+        },
+        createNewMessage(index){
+            this.contacts[index].messages.push({
+                date: this.dateToday + " " + this.timeToday,
+                message: this.msg,
+                status: 'sent'
+            });
+            this.msg = ''
+            // perchè mi cambia l'orario ?
+        }
     },
-    mounted() {
+    created() {
         this.createDateToday()
         this.createCurrentTime()
-        console.log(this.timeToday);
+        console.log(this.timeToday)
     },
 
 }).mount('#app')
@@ -227,5 +243,11 @@ createApp({
 
 
 throw new Error("Segui il coniglio bianco");
+
+
+
+
+
+
 
 

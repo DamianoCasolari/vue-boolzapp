@@ -67,7 +67,8 @@
                </div>
                <!-- create chats list  -->
                <div class="chats_list p-2 d-flex justify-content-between standard_list_height c_pointer overflow-hidden"
-                  v-for="(contact,index) in contacts" @click="changeCurrentIndex(index)">
+                  :class="index == currentIndex ? 'chat_clicked' : '' " v-for="(contact,index) in contacts"
+                  @click="changeCurrentIndex(index)">
 
                   <div class="chat_contact_info d-flex">
                      <div class="img_container">
@@ -80,7 +81,7 @@
                            1].message}}</div>
                      </div>
                   </div>
-                  <div class="fs_7 color_time">{{extract_time_or_date(index)}} </div>
+                  <div class="fs_7 color_time">{{extract_date(index)}} </div>
                </div>
             </div>
             <!-- create a container for main Chat  -->
@@ -94,8 +95,9 @@
                            alt="users_avatar">
                         <div class="info_chat ms-2">
                            <div class="name_current_chat fs_12 text-break">{{contacts[currentIndex].name}}</div>
-                           <div class="Last_message_sent fs_7 color_time">{{'Ultimo accesso alle ' +
-                              only_time(currentIndex)}} </div>
+                           <div class="Last_message_sent fs_7 color_time">{{'Ultimo accesso ' +
+                              extract_date(currentIndex) + ' alle ' +
+                              extract_time(currentIndex)}} </div>
                         </div>
                      </div>
                      <!-- create navbar current contact  -->
@@ -119,14 +121,14 @@
                         <div class="position_messagge d-flex justify-content-end" v-if="message.status == 'sent'">
                            <div class="user_message_container bg_user_message my-1">
                               <div class="message_text text-break">{{message.message}}</div>
-                              <div class="message_time fs_7 color_time text-end">{{only_time(index)}}</div>
+                              <div class="message_time fs_7 color_time text-end">{{extract_time(index)}}</div>
                            </div>
                         </div>
                         <!-- create template to other contact message  -->
 
                         <div class="contact_text my-1 bg-light" v-else>
                            <div class="message_text text-break">{{message.message}}</div>
-                           <div class="message_time fs_7 color_time text-end">{{only_time(index)}}</div>
+                           <div class="message_time fs_7 color_time text-end">{{extract_time(index)}}</div>
                         </div>
                      </div>
                   </div>
@@ -137,7 +139,8 @@
                   <button class="border border-0 bg-transparent">
                      <i class="fa-regular fa-face-smile "></i>
                   </button>
-                  <input type="text" class="chat_input flex-grow-1 my-1 rounded-1" v-model="msg" @keyup.enter="">
+                  <input type="text" class="chat_input flex-grow-1 my-1 rounded-1" v-model="msg" @keyup.enter="createNewMessage(currentIndex)"
+                     autofocus>
                   <button class="border border-0 bg-transparent">
                      <i class="fa fa-microphone" aria-hidden="true"></i>
                   </button>
