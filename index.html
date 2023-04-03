@@ -83,7 +83,7 @@
                               1].message}}</div>
                         </div>
                      </div>
-                     <div class="fs_7 color_time mr_3px">{{extractLastDate(index)}} </div>
+                     <div class="fs_7 color_time">{{extractLastDate(index)}} </div>
                   </div>
                </div>
             </div>
@@ -122,16 +122,18 @@
                         <!-- create template to user message  -->
                         <!-- <div class="magic date"></div> -->
                         <div class="position_messagge d-flex justify-content-end" v-if="message.status == 'sent'">
-                           <div class="user_message_container bg_user_message my-1">
+                           <div class="user_message_container bg_user_message my-1 position-relative">
                               <div class="message_text text-break">{{message.message}}</div>
                               <div class="message_time fs_7 color_time text-end">{{extract_time(index)}}</div>
+                              <div class="arrow_delete position-absolute"><i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i> </div>
                            </div>
                         </div>
                         <!-- create template to other contact message  -->
 
-                        <div class="contact_text my-1 bg-light" v-else>
+                        <div class="contact_text my-1 bg-light position-relative" v-else>
                            <div class="message_text text-break">{{message.message}}</div>
                            <div class="message_time fs_7 color_time text-end">{{extract_time(index)}}</div>
+                           <div class="arrow_delete position-absolute"><i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i> </div>
                         </div>
                      </div>
                   </div>

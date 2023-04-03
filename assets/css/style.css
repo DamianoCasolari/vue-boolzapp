@@ -244,6 +244,18 @@ button i:hover {
     margin-top: 6px;
 }
 
+.arrow_delete {
+    right: 2px;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    cursor: pointer;
+    visibility: hidden;
+}
+.user_message_container:hover .arrow_delete, .contact_text:hover .arrow_delete {
+    visibility: visible;
+}
+
+
 /* bottom main chat place (input zone)  */
 
 .input_text_zone i {
