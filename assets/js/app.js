@@ -216,7 +216,7 @@ createApp({
             }
 
         },
-        extract_time(index) {
+        extractTime(index) {
             const [date, time] = this.contacts[this.currentIndex].messages[index].date.split(" ")
             if (time.length > 5) {
                 return (time.slice(0, -3))
@@ -246,13 +246,17 @@ createApp({
             this.messageArchive = this.messageArchive.filter((object) => object.index !== this.currentIndex)
         },
         createNewMessage(index) {
+            if (this.msg.trim().length > 0) {
             this.contacts[index].messages.push({
                 date: this.dateToday + " " + this.timeToday,
                 message: this.msg,
                 status: 'sent'
             });
             this.msg = '';
-            this.automaticAnswer(index)
+            this.automaticAnswer(index) }
+            else {
+                return
+            }
         },
         automaticAnswer(index) {
             setTimeout(() => {
@@ -276,7 +280,7 @@ createApp({
                 console.log(index);
             }
         },
-        changeLayout(){
+        changeLayout() {
             this.light = !this.light;
         }
     },

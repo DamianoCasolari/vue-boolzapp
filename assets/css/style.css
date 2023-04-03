@@ -14,10 +14,13 @@ input[type="text"] {
     border: none;
 }
 
-button i:hover {
+button i:hover, div i:hover {
     filter: brightness(120%);
 }
 
+.fa-sun, .fa-moon {
+    animation: drop 0.5s forwards;
+}
 /* Utility selector  */
 
 /* color zone  */
@@ -52,6 +55,10 @@ button i:hover {
 
 .primary_text {
     color: var(--bz-baground1);
+}
+
+.bg_dark_messages {
+    border: 2px solid var(--bz-gray_icon);
 }
 
 
@@ -271,4 +278,18 @@ button i:hover {
 
 footer {
     background-color: var(--bz-baground2);
+}
+
+
+/* ANIMATION  */
+
+@keyframes drop {
+    from {
+        transform: translateY(-50px)
+    }
+    to {
+        transform: translateY(0)
+
+    }
+    
 }

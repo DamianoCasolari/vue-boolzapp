@@ -125,9 +125,9 @@
                         <!-- <div class="magic date"></div> -->
                         <div class="position_messagge d-flex justify-content-end dropdown"
                            v-if="message.status == 'sent'">
-                           <div class="user_message_container bg_user_message my-1 position-relative">
+                           <div class="user_message_container my-1 position-relative" :class="light ? 'bg_user_message' : 'bg_dark_messages'">
                               <div class="message_text text-break">{{message.message}}</div>
-                              <div class="message_time fs_7 color_time text-end">{{extract_time(index)}}</div>
+                              <div class="message_time fs_7 color_time text-end">{{extractTime(index)}}</div>
                               <div class="arrow_delete position-absolute" data-bs-toggle="dropdown">
                                  <i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i>
                               </div>
@@ -139,9 +139,9 @@
                         </div>
                         <!-- create template to other contact message  -->
 
-                        <div class="contact_text my-1 bg-light position-relative" data-bs-toggle="dropdown" v-else>
+                        <div class="contact_text my-1 position-relative" :class="light ? 'bg-light ' : 'bg_dark_messages'" data-bs-toggle="dropdown" v-else>
                            <div class="message_text text-break">{{message.message}}</div>
-                           <div class="message_time fs_7 color_time text-end">{{extract_time(index)}}</div>
+                           <div class="message_time fs_7 color_time text-end">{{extractTime(index)}}</div>
                            <div class="arrow_delete position-absolute">
                               <i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i>
                            </div>
@@ -161,8 +161,11 @@
                   </button>
                   <input type="text" class="chat_input flex-grow-1 my-1 rounded-1" v-model="msg"
                      @keyup.enter="createNewMessage(currentIndex)" autofocus>
-                  <button class="border border-0 bg-transparent">
+                  <button class="border border-0 bg-transparent" v-if="!msg">
                      <i class="fa fa-microphone" aria-hidden="true"></i>
+                  </button>
+                  <button class="border border-0 bg-transparent" v-if="msg" @click="createNewMessage(currentIndex)">
+                     <i class="fa-solid fa-paper-plane"></i>
                   </button>
                </div>
             </div>
