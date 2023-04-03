@@ -39,6 +39,10 @@ button i:hover, div i:hover {
     background-color: var(--bz-my_message);
 }
 
+.background_primary {
+    background-color: var(--bz-baground1);
+}
+
 .background_secondary {
     background-color: var(--bz-secondary);
 }

@@ -29,9 +29,54 @@
       <div class="my_background d-flex justify-content-end align-items-center flex-column"
          :class="light ? '' : 'dark_layout' ">
          <div class="position-fixed text-light top-0 end-0 m-3 c_pointer" v-if="!light" @click="changeLayout()"><i
-               class="fa-solid fa-sun fa-xl"></i></div>
+               class="fa-solid fa-sun fa-xl"></i>
+         </div>
          <div class="position-fixed text-light top-0 end-0 m-3 c_pointer" v-if="light" @click="changeLayout()"><i
-               class="fa-solid fa-moon fa-xl"></i></div>
+               class="fa-solid fa-moon fa-xl"></i>
+         </div>
+         <div class="position-fixed text-light top-0 start-0 m-3 c_pointer" @click="addContact()"
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"><i class="fa-solid fa-plus fa-xl"></i>
+         </div>
+         <div class="offcanvas offcanvas-start w-25 p-2" data-bs-scroll="true" tabindex="-1"
+            id="offcanvasWithBothOptions">
+            <div class="offcanvas-header">
+               <div id="offcanvasWithBothOptionsLabel">Nuovo contatto</div>
+               <button type="button" class="btn-close fs-6 align-middle" data-bs-dismiss="offcanvas"
+                  aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body d-flex flex-column align-items-center p-1">
+               <form action="">
+                  <label for="newName" class="col-form-label fs_12 ">Nome</label>
+                  <input id="newName" class="input-group border border-2 m-1" type="text" v-model="nameNewContact" autofocus>
+                  <label for="newAvatar" class="col-form-label fs_12 ">Link immagine profilo</label>
+                  <input id="newAvatar" class="input-group border border-2 m-1 text-start" type="text"
+                     v-model="linkNewAvatar">
+                  <button
+                     class=" rounded-pill background_primary bordre border-0 fs_12 m-2 py-2 px-4 text-white" @click.prevent="">Aggiungi
+                     nuovo contatto</button>
+               </form>
+            </div>
+         </div>
+
+         <!-- 
+         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>
+
+         <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+           <div class="offcanvas-header">
+             <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+           </div>
+           <div class="offcanvas-body">
+             <p>Try scrolling the rest of the page to see this option in action.</p>
+           </div>
+         </div> -->
+
+
+
+
+
+
+
          <main class="my_container d-flex">
             <!-- create a container for the various chats (chat lists)  -->
             <div class="sidebar col-4 h-100">
@@ -125,7 +170,8 @@
                               </div>
                            </li>
                            <li>
-                              <div class="dropdown-item c_pointer" @click="deleteChat(this.currentIndex)">Delete chat</div>
+                              <div class="dropdown-item c_pointer" @click="deleteChat(this.currentIndex)">Delete chat
+                              </div>
                            </li>
                         </ul>
                      </nav>

@@ -304,6 +304,7 @@ createApp({
         },
         deleteChat(index){
             this.contacts.splice(index,1)
+            this.arrayContactsArchive.splice(index,1)
         }
     },
     created() {
