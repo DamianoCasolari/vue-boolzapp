@@ -76,7 +76,7 @@
                         <div class="img_container">
                            <img class="h-100" :src="contact.avatar" :alt="contact.name">
                         </div>
-                        <div class="info_chat ms-2">
+                        <div class="info_chat ms-2 d-flex flex-column justify-content-center">
                            <div class="name_current_chat fs_12 text-break">{{contact.name}}</div>
                            <div class="Last_message_sent fs_7 color_time text-break" v-if="contact.messages.length > 0">
                               {{contact.messages[contact.messages.length -
