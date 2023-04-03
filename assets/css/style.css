@@ -4,6 +4,10 @@ body {
     min-width: 576px;
 }
 
+.dark_layout,.dark_layout img {
+    filter: invert(1);
+}
+
 input[type="search"],
 input[type="text"] {
     outline: none;
@@ -93,7 +97,7 @@ button i:hover {
 
 .my_container {
     width: 80%;
-    height: 90%;
+    height: 95%;
 
 }
 

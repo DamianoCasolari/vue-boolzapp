@@ -176,6 +176,7 @@ createApp({
             currentIndex: 0,
             currentIndexMessage: 0,
             messageArchive: [],
+            light: true,
 
         }
     },
@@ -271,9 +272,13 @@ createApp({
         },
         deleteMessage(index) {
             if (this.contacts[this.currentIndex].messages[index]) {
-            this.contacts[this.currentIndex].messages.splice(index,1)
-            console.log(index);
-        }}
+                this.contacts[this.currentIndex].messages.splice(index, 1)
+                console.log(index);
+            }
+        },
+        changeLayout(){
+            this.light = !this.light;
+        }
     },
     created() {
         this.createDateToday()
