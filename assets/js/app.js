@@ -199,8 +199,15 @@ createApp({
 
         },
         extract_time(index) {
-            const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
-            return (time.slice(0, -3))
+            const [date, time] = this.contacts[this.currentIndex].messages[index].date.split(" ")
+            if (time.length > 5) {
+                return (time.slice(0, -3))
+                console.log(time,index);
+            } else {
+                return time
+                console.log(time,index);
+
+            }
         },
         changeCurrentIndex(index) {
             this.toSaveMsg()
@@ -219,18 +226,28 @@ createApp({
             // const currentMessage = this.messageArchive.filter((object) => object.index == this.currentIndex);  perchè il filter non gli piace?
             if (currentMessage) {
                 this.msg = currentMessage.message;
-            } 
+            }
             this.messageArchive = this.messageArchive.filter((object) => object.index !== this.currentIndex)
         },
-        createNewMessage(index){
+        createNewMessage(index) {
             this.contacts[index].messages.push({
                 date: this.dateToday + " " + this.timeToday,
                 message: this.msg,
                 status: 'sent'
             });
-            this.msg = ''
+            this.msg = '';
+            this.automaticAnswer(index)
             // perchè mi cambia l'orario ?
-        }
+        },
+        automaticAnswer(index) {
+            setTimeout(() => {
+                this.contacts[index].messages.push({
+                    date: this.dateToday + " " + this.timeToday,
+                    message: "ok",
+                    status: 'received'
+                });
+            }, 1000)
+        },
     },
     created() {
         this.createDateToday()
@@ -241,8 +258,6 @@ createApp({
 }).mount('#app')
 
 
-
-throw new Error("Segui il coniglio bianco");
 
 
 
