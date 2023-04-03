@@ -168,20 +168,21 @@ createApp({
                     ],
                 },
             ],
-            arrayContactsArchive: [],
-            currentIndex: 0,
             dateToday: "",
             timeToday: "",
             msg: "",
-            messageArchive: [
-            ],
             searchInput: "",
+            arrayContactsArchive: [],
+            currentIndex: 0,
+            currentIndexMessage: 0,
+            messageArchive: [],
+
         }
     },
     methods: {
         saveContacts() {
             let savedFirstContacts = this.contacts
-            savedFirstContacts.forEach((object)=> this.arrayContactsArchive.push(object) )
+            savedFirstContacts.forEach((object) => this.arrayContactsArchive.push(object))
         },
         createDateToday() {
             const today = new Date();
@@ -264,11 +265,15 @@ createApp({
         functionSearch() {
             const newFilterArray = this.arrayContactsArchive.filter((object) => object.name.toLowerCase().includes(this.searchInput))
             this.contacts = newFilterArray
-            console.log(newFilterArray);  
+            console.log(newFilterArray);
             // perchè da errore se il nome non esiste?
 
         },
-        
+        deleteMessage(index) {
+            if (this.contacts[this.currentIndex].messages[index]) {
+            this.contacts[this.currentIndex].messages.splice(index,1)
+            console.log(index);
+        }}
     },
     created() {
         this.createDateToday()
