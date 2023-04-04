@@ -182,7 +182,8 @@ createApp({
             NewAvatarLink: "",
             isWritingString: false,
             isOnline: false,
-            selectChat : false
+            selectChat: false,
+            splashPage: true,
         }
     },
     methods: {
@@ -338,13 +339,19 @@ createApp({
             }
         },
         selectMobileChat() {
-            this.selectChat = !this.selectChat 
+            this.selectChat = !this.selectChat
+        },
+        splashPageFunction() {
+            setTimeout(() => {
+                this.splashPage = !this.splashPage
+            },1000)
         }
     },
     created() {
         this.createDateToday()
         this.createCurrentTime()
         this.saveContacts()
+        this.splashPageFunction()
         console.log(this.contacts[this.currentIndex].messages[this.contacts[this.currentIndex].messages.length - 1].status);
     },
 

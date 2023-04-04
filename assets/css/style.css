@@ -1,9 +1,10 @@
 /* General selector  */
 body {
-    font-family: 'Roboto', sans-serif;  
+    font-family: 'Roboto', sans-serif;
 }
 
-.dark_layout,.dark_layout img {
+.dark_layout,
+.dark_layout img {
     filter: invert(1);
 }
 
@@ -13,7 +14,8 @@ input[type="text"] {
     border: none;
 }
 
-button i:hover, div i:hover {
+button i:hover,
+div i:hover {
     filter: brightness(120%);
 }
 
@@ -100,6 +102,7 @@ button i:hover, div i:hover {
 .drop {
     animation: drop 0.5s forwards;
 }
+
 /* Container selctor  */
 
 .my_background {
@@ -111,6 +114,7 @@ button i:hover, div i:hover {
 .my_container {
     width: 80%;
     height: 95%;
+    filter: drop-shadow(2px 2px 2px rgb(146, 146, 146));
 
 }
 
@@ -201,6 +205,7 @@ button i:hover, div i:hover {
     visibility: hidden;
     transition: opacity 0.3s ease-in-out;
 }
+
 .chat_text:hover::-webkit-scrollbar-thumb {
     visibility: visible;
 }
@@ -264,11 +269,13 @@ button i:hover, div i:hover {
 .arrow_delete {
     right: 2px;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     cursor: pointer;
     visibility: hidden;
 }
-.user_message_container:hover .arrow_delete, .contact_text:hover .arrow_delete {
+
+.user_message_container:hover .arrow_delete,
+.contact_text:hover .arrow_delete {
     visibility: visible;
 }
 
@@ -286,6 +293,23 @@ footer {
     background-color: var(--bz-baground2);
 }
 
+/* Splash page  */
+
+.splash_page {
+    text-align: center;
+    background-color: var(--bz-baground1);
+    color: var(--bz-gray_light);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 3;
+    padding: 12px 24px 12px 24px;
+    border-radius: 20px;
+    font-size: 20px;
+    animation: fade 1s;
+    filter: drop-shadow(3px 3px 5px black);
+}
+
 
 /* ANIMATION  */
 
@@ -293,11 +317,22 @@ footer {
     from {
         transform: translateY(-50px)
     }
+
     to {
         transform: translateY(0)
-
     }
-    
+
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
 }
 
 /* MEDIA QUERY  */
@@ -306,6 +341,7 @@ footer {
     .sidebar {
         display: block !important;
     }
+
     .main_chat {
         display: flex !important;
     }

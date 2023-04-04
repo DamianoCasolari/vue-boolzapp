@@ -26,6 +26,11 @@
 
 <body>
    <div id="app">
+
+      <div class="splash_page position-absolute" :class="{'d-none' : !splashPage}"> 
+         <span class="paperPlane me-2"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
+         <span class="splah_text">Benvenuto su Bootzap</span>
+      </div>
       <div class="my_background d-flex justify-content-end align-items-center flex-column"
          :class="light ? '' : 'dark_layout' ">
          <div class="position-fixed text-light top-0 end-0 m-3 c_pointer d-none d-sm-block drop" v-if="!light"
@@ -58,7 +63,7 @@
                </form>
             </div>
          </div>
-         <main class="my_container d-flex">
+         <main class="my_container d-flex" :class="{'d-none' : splashPage}">
             <!-- create a container for the various chats (chat lists)  -->
             <div class="sidebar col-12 col-sm-4 h-100" :class="{'d-none': selectChat, 'd-block': !selectChat}">
                <!--  user profile plus navbar -->
