@@ -102,7 +102,9 @@ div i:hover {
 .drop {
     animation: drop 0.5s forwards;
 }
-
+.shadow {
+    filter: drop-shadow(2px 2px 2px rgb(146, 146, 146));
+}
 /* Container selctor  */
 
 .my_background {
@@ -114,7 +116,6 @@ div i:hover {
 .my_container {
     width: 80%;
     height: 95%;
-    filter: drop-shadow(2px 2px 2px rgb(146, 146, 146));
 
 }
 
