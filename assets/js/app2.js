@@ -359,7 +359,6 @@ createApp({
 
 
 
-// potrei mettere un avatar nel caso l'immagine sia undefined
 
 
 
