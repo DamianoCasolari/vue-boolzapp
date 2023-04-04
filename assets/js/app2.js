@@ -182,6 +182,7 @@ createApp({
             NewAvatarLink: "",
             isWritingString: false,
             isOnline: false,
+            selectChat : false
         }
     },
     methods: {
@@ -335,6 +336,9 @@ createApp({
                 const btnClose = document.querySelector(".btn-close")
                 btnClose.click()
             }
+        },
+        selectMobileChat() {
+            this.selectChat = !this.selectChat 
         }
     },
     created() {

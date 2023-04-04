@@ -1,11 +1,7 @@
 /* General selector  */
 body {
-    font-family: 'Roboto', sans-serif;
-    min-width: 576px;
-    
+    font-family: 'Roboto', sans-serif;  
 }
-
-
 
 .dark_layout,.dark_layout img {
     filter: invert(1);
@@ -21,9 +17,6 @@ button i:hover, div i:hover {
     filter: brightness(120%);
 }
 
-.fa-sun, .fa-moon {
-    animation: drop 0.5s forwards;
-}
 /* Utility selector  */
 
 /* color zone  */
@@ -102,6 +95,10 @@ button i:hover, div i:hover {
 
 .rb_rounded {
     border-radius: 0 30px 30px 0;
+}
+
+.drop {
+    animation: drop 0.5s forwards;
 }
 /* Container selctor  */
 
@@ -301,4 +298,15 @@ footer {
 
     }
     
+}
+
+/* MEDIA QUERY  */
+
+@media screen and (min-width: 576px) {
+    .sidebar {
+        display: block !important;
+    }
+    .main_chat {
+        display: flex !important;
+    }
 }

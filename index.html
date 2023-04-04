@@ -28,16 +28,16 @@
    <div id="app">
       <div class="my_background d-flex justify-content-end align-items-center flex-column"
          :class="light ? '' : 'dark_layout' ">
-         <div class="position-fixed text-light top-0 end-0 m-3 c_pointer d-sm-block" v-if="!light" @click="changeLayout()"><i
-               class="fa-solid fa-sun fa-xl"></i>
+         <div class="position-fixed text-light top-0 end-0 m-3 c_pointer d-none d-sm-block drop" v-if="!light"
+            @click="changeLayout()"><i class="fa-solid fa-sun fa-xl"></i>
          </div>
-         <div class="position-fixed text-light top-0 end-0 m-3 d-none d-sm-block c_pointer" v-if="light" @click="changeLayout()"><i
-               class="fa-solid fa-moon fa-xl"></i>
+         <div class="position-fixed text-light top-0 end-0 m-3 d-none d-sm-block c_pointer drop" v-if="light"
+            @click="changeLayout()"><i class="fa-solid fa-moon fa-xl"></i>
          </div>
-         <div class="position-fixed text-light top-0 start-0 m-3 c_pointer"
-            data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"><i class="fa-solid fa-plus fa-xl"></i>
+         <div class="position-fixed text-light top-0 start-0 m-3 c_pointer d-none d-sm-block" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasWithBothOptions"><i class="fa-solid fa-plus fa-xl"></i>
          </div>
-         <div class="offcanvas offcanvas-start w-25 p-2 rb_rounded" data-bs-scroll="true" tabindex="-1"
+         <div class="offcanvas offcanvas-start  p-2 rb_rounded" data-bs-scroll="true" tabindex="-1"
             id="offcanvasWithBothOptions">
             <div class="offcanvas-header">
                <div id="offcanvasWithBothOptionsLabel">Nuovo contatto</div>
@@ -47,19 +47,20 @@
             <div class="offcanvas-body d-flex flex-column align-items-center p-1">
                <form action="">
                   <label for="newName" class="col-form-label fs_12 ">Nome</label>
-                  <input id="newName" class="input-group border border-2 m-1" type="text" v-model="NewNameContact"> <!-- autofocus non funziona mai-->
+                  <input id="newName" class="input-group border border-2 m-1" type="text" v-model="NewNameContact">
+                  <!-- autofocus non funziona mai-->
                   <label for="newAvatar" class="col-form-label fs_12 ">Link immagine profilo</label>
                   <input id="newAvatar" class="input-group border border-2 m-1 text-start" type="text"
                      v-model="NewAvatarLink">
-                  <button
-                     class=" rounded-pill background_primary bordre border-0 fs_12 m-2 py-2 px-4 text-white" @click.prevent="addContact()">Aggiungi
+                  <button class=" rounded-pill background_primary bordre border-0 fs_12 m-2 py-2 px-4 text-white"
+                     @click.prevent="addContact()">Aggiungi
                      nuovo contatto</button>
                </form>
             </div>
          </div>
          <main class="my_container d-flex">
             <!-- create a container for the various chats (chat lists)  -->
-            <div class="sidebar col-4 h-100">
+            <div class="sidebar col-12 col-sm-4 h-100" :class="{'d-none': selectChat, 'd-block': !selectChat}">
                <!--  user profile plus navbar -->
                <div
                   class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
@@ -68,6 +69,20 @@
                      <div class="user_name ms-2 fs_12 fw-bold primary_text">Sofia</div>
                   </div>
                   <nav class="user_option d-flex align-items-center">
+
+                     <button class="border border-0 text-light c_pointer d-sm-none bg-transparent"
+                        data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions">
+                        <i class="fa-solid fa-plus"></i>
+                     </button>
+                     <button class="border border-0 text-light d-sm-none c_pointer bg-transparent" v-if="!light"
+                        @click="changeLayout()">
+                        <i class="fa-solid fa-sun "></i>
+                     </button>
+                     <button class="border border-0 text-light d-sm-none c_pointer bg-transparent" v-if="light"
+                        @click="changeLayout()">
+                        <i class="fa-solid fa-moon"></i>
+                     </button>
+
                      <button class="border border-0 bg-transparent"><i class="fa-solid fa-circle-notch"></i></button>
                      <button class="border border-0 bg-transparent"><i class="fa-solid fa-message"></i></button>
                      <button class="border border-0 bg-transparent"><i
@@ -100,13 +115,14 @@
                   <div
                      class="chats_list p-2 d-flex justify-content-between standard_list_height c_pointer overflow-hidden"
                      :class="index == currentIndex ? 'chat_clicked' : '' " v-for="(contact,index) in contacts"
-                     @click="changeCurrentIndex(index)">
+                     @click="changeCurrentIndex(index), selectMobileChat()">
 
                      <div class="chat_contact_info d-flex">
                         <div class="img_container">
                            <img class="h-100" :src="contact.avatar" :alt="contact.name">
                         </div>
-                        <div class="info_chat ms-2" :class="{'d-flex flex-column justify-content-center' : contact.messages.length == 0 }">
+                        <div class="info_chat ms-2"
+                           :class="{'d-flex flex-column justify-content-center' : contact.messages.length == 0 }">
                            <div class="name_current_chat fs_12 text-break">{{contact.name}}</div>
                            <div class="Last_message_sent fs_7 color_time text-break" v-if="contact.messages.length > 0">
                               {{contact.messages[contact.messages.length -
@@ -118,12 +134,15 @@
                </div>
             </div>
             <!-- create a container for main Chat  -->
-            <div class="main_chat col-8 d-flex flex-column h-100">
+            <div class="main_chat col-12 col-sm-8 flex-column h-100 d-sm-flex" :class="{'d-none': !selectChat, 'd-flex': selectChat}">
 
                <div class="current_chat" v-if="currentIndex != -1">
                   <div
                      class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
                      <div class="users_img d-flex align-items-center">
+                        <button class="border border-0 bg-transparent d-sm-none" @click="selectMobileChat()">
+                           <i class="fa-solid fa-arrow-left"></i>
+                        </button>
                         <img class="align-middle rounded-circle" :src="contacts[currentIndex].avatar"
                            alt="users_avatar">
                         <div class="info_chat ms-2">
@@ -131,7 +150,6 @@
                            <div class="last_message_sent fs_7 color_time"
                               v-if="this.contacts[currentIndex].messages.length > 0">{{lastDateTime()}} </div>
                         </div>
-                        <!-- this.isWriting() -->
                      </div>
                      <!-- create navbar current contact  -->
                      <nav class="user_option d-flex align-items-center">
