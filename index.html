@@ -9,7 +9,7 @@
 
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
       integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
@@ -28,9 +28,9 @@
 <body>
    <div id="app">
 
-      <div class="splash_page position-absolute" :class="{'d-none' : !splashPage}"> 
+      <div class="splash_page position-absolute" :class="{'d-none' : !splashPage}">
          <span class="paperPlane me-2"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
-         <span class="splah_text">Benvenuto su Bootzap</span>
+         <span class="splah_text">Bootzap</span>
       </div>
       <div class="my_background d-flex justify-content-end align-items-center flex-column"
          :class="light ? '' : 'dark_layout' ">
@@ -43,14 +43,14 @@
          <div class="position-fixed text-light top-0 start-0 m-3 c_pointer d-none d-sm-block" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasWithBothOptions"><i class="fa-solid fa-plus fa-xl"></i>
          </div>
-         <div class="offcanvas offcanvas-start  p-2 rb_rounded" data-bs-scroll="true" tabindex="-1"
+         <div class="offcanvas offcanvas-start  p-2 rb_rounded special_background" data-bs-scroll="true" tabindex="-1"
             id="offcanvasWithBothOptions">
             <div class="offcanvas-header">
-               <div id="offcanvasWithBothOptionsLabel">Nuovo contatto</div>
+               <div id="offcanvasWithBothOptionsLabel" class="fw-bold">Nuovo contatto</div>
                <button type="button" class="btn-close fs-6 align-middle" data-bs-dismiss="offcanvas"
                   aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body d-flex flex-column align-items-center p-1">
+            <div class="offcanvas-body d-flex flex-column align-items-center p-1 ">
                <form action="">
                   <label for="newName" class="col-form-label fs_12 ">Nome</label>
                   <input id="newName" class="input-group border border-2 m-1" type="text" v-model="NewNameContact">
@@ -140,8 +140,9 @@
                </div>
             </div>
             <!-- create a container for main Chat  -->
-            <div class="main_chat col-12 col-sm-8 flex-column h-100 d-sm-flex" :class="{'d-none': !selectChat, 'd-flex': selectChat}">
-
+            <div class="main_chat col-12 col-sm-8 flex-column h-100 d-sm-flex special_background"
+               :class="{'d-none': !selectChat, 'd-flex': selectChat}">
+               <div class="introduction text-center d-flex align-items-center justify-content-center h-100" v-if="currentIndex == -1"> Benvenuto su Bootzap <br> Seleziona una delle chat nella tua rubrica</div>
                <div class="current_chat" v-if="currentIndex != -1">
                   <div
                      class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">

@@ -171,7 +171,7 @@ createApp({
             msg: "",
             searchInput: "",
             arrayContactsArchive: [],
-            currentIndex: 0,
+            currentIndex: -1,
             currentIndexMessage: 0,
             messageArchive: [],
             light: true,
@@ -352,7 +352,6 @@ createApp({
         this.createCurrentTime()
         this.saveContacts()
         this.splashPageFunction()
-        console.log(this.contacts[this.currentIndex].messages[this.contacts[this.currentIndex].messages.length - 1].status);
     },
 
 }).mount('#app')
