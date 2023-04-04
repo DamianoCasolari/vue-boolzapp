@@ -184,6 +184,7 @@ createApp({
             isOnline: false,
             selectChat: false,
             splashPage: true,
+            increaseFontSize : false,
         }
     },
     methods: {
@@ -300,7 +301,6 @@ createApp({
             const newFilterArray = this.arrayContactsArchive.filter((object) => object.name.toLowerCase().includes(this.searchInput))
             this.contacts = newFilterArray
             console.log(newFilterArray);
-            // perchè da errore se il nome non esiste?
 
         },
         deleteMessage(index) {
@@ -340,6 +340,9 @@ createApp({
         },
         selectMobileChat() {
             this.selectChat = !this.selectChat
+        },
+        changeSize() {
+            this.increaseFontSize = !this.increaseFontSize
         },
         splashPageFunction() {
             setTimeout(() => {

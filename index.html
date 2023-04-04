@@ -52,13 +52,13 @@
             </div>
             <div class="offcanvas-body d-flex flex-column align-items-center p-1 ">
                <form action="">
-                  <label for="newName" class="col-form-label fs_12 ">Nome</label>
+                  <label for="newName" class="col-form-label" :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">Nome</label>
                   <input id="newName" class="input-group border border-2 m-1" type="text" v-model="NewNameContact">
                   <!-- autofocus non funziona mai-->
-                  <label for="newAvatar" class="col-form-label fs_12 ">Link immagine profilo</label>
+                  <label for="newAvatar" class="col-form-label" :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">Link immagine profilo</label>
                   <input id="newAvatar" class="input-group border border-2 m-1 text-start" type="text"
                      v-model="NewAvatarLink">
-                  <button class=" rounded-pill background_primary bordre border-0 fs_12 m-2 py-2 px-4 text-white"
+                  <button class=" rounded-pill background_primary bordre border-0 m-2 py-2 px-4 text-white" :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }"
                      @click.prevent="addContact()">Aggiungi
                      nuovo contatto</button>
                </form>
@@ -72,7 +72,7 @@
                   class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
                   <div class="users_img d-flex align-items-center">
                      <img class="align-middle rounded-circle" src="./assets/img/avatar_io.jpg" alt="users_avatar">
-                     <div class="user_name ms-2 fs_12 fw-bold primary_text">Sofia</div>
+                     <div class="user_name ms-2 fw-bold primary_text"  :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">Sofia</div>
                   </div>
                   <nav class="user_option d-flex align-items-center">
 
@@ -89,6 +89,7 @@
                         <i class="fa-solid fa-moon"></i>
                      </button>
 
+                     <button class="border border-0 bg-transparent" @click="changeSize()"><i class="fa-solid fa-font"></i></button>
                      <button class="border border-0 bg-transparent"><i class="fa-solid fa-circle-notch"></i></button>
                      <button class="border border-0 bg-transparent"><i class="fa-solid fa-message"></i></button>
                      <button class="border border-0 bg-transparent"><i
@@ -103,8 +104,8 @@
                         <i class="fa-solid fa-bell-slash"></i>
                      </div>
                      <div class="info ms-2 d-flex flex-column">
-                        <div class="fs_9 fw-bold">Ricevi notifiche di nuovi messaggi</div>
-                        <a href="#" class="fs_7 primary_text">Attiva notifiche desktop</a>
+                        <div class="fw-bold" :class="{'fs_9' : !increaseFontSize,'fs_9_plus' : increaseFontSize }">Ricevi notifiche di nuovi messaggi</div>
+                        <a href="#" class="primary_text"  :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }">Attiva notifiche desktop</a>
                      </div>
                   </div>
                </div>
@@ -114,7 +115,7 @@
                         class="fa-xs fa-solid fa-magnifying-glass mt-1"></i>
                   </div>
                   <input type="search" class="w-100" placeholder="Cerca o inizia una nuova chat"
-                     class="border border-0 fs_10" v-model="searchInput" @input.trim="functionSearch()">
+                     class="border border-0" :class="{'fs_10' : !increaseFontSize,'fs_10_plus' : increaseFontSize }" v-model="searchInput" @input.trim="functionSearch()">
                </div>
                <!-- create chats list  -->
                <div class="chats_container">
@@ -129,23 +130,23 @@
                         </div>
                         <div class="info_chat ms-2"
                            :class="{'d-flex flex-column justify-content-center' : contact.messages.length == 0 }">
-                           <div class="name_current_chat fs_12 text-break">{{contact.name}}</div>
-                           <div class="Last_message_sent fs_7 color_time text-break" v-if="contact.messages.length > 0">
+                           <div class="name_current_chat text-break"  :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">{{contact.name}}</div>
+                           <div class="Last_message_sent color_time text-break"  :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }" v-if="contact.messages.length > 0">
                               {{contact.messages[contact.messages.length -
                               1].message}}</div>
                         </div>
                      </div>
-                     <div class="fs_7 color_time" v-if="contact.messages.length > 0">{{extractLastDate(index)}} </div>
+                     <div class="color_time" :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }" v-if="contact.messages.length > 0">{{extractLastDate(index)}} </div>
                   </div>
                </div>
             </div>
             <!-- create a container for main Chat  -->
             <div class="main_chat col-12 col-sm-8 flex-column h-100 d-sm-flex special_background"
                :class="{'d-none': !selectChat, 'd-flex': selectChat}">
-               <div class="introduction text-center d-flex align-items-center justify-content-center h-100" v-if="currentIndex == -1"> Benvenuto su Bootzap <br> Seleziona una delle chat nella tua rubrica</div>
+               <div class="introduction text-center d-flex align-items-center justify-content-center h-100 px-3" v-if="currentIndex == -1"> Benvenuto su Bootzap <br> Seleziona una delle chat nella tua rubrica</div>
                <div class="current_chat" v-if="currentIndex != -1">
                   <div
-                     class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
+                     class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary  overflow-hidden">
                      <div class="users_img d-flex align-items-center">
                         <button class="border border-0 bg-transparent d-sm-none" @click="selectMobileChat()">
                            <i class="fa-solid fa-arrow-left"></i>
@@ -153,8 +154,8 @@
                         <img class="align-middle rounded-circle" :src="contacts[currentIndex].avatar"
                            alt="users_avatar">
                         <div class="info_chat ms-2">
-                           <div class="name_current_chat fs_12 text-break">{{contacts[currentIndex].name}}</div>
-                           <div class="last_message_sent fs_7 color_time"
+                           <div class="name_current_chat text-break"  :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">{{contacts[currentIndex].name}}</div>
+                           <div class="last_message_sent color_time d-sm-block" :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }"
                               v-if="this.contacts[currentIndex].messages.length > 0">{{lastDateTime()}} </div>
                         </div>
                      </div>
@@ -183,7 +184,7 @@
                   </div>
                   <!-- create a primary chat place for the current contact -->
                   <div class="chat_text" v-if="contacts[currentIndex].messages.length > 0">
-                     <div class="container_messages fs_12" v-for="(message,index) in contacts[currentIndex].messages">
+                     <div class="container_messages"  :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }" v-for="(message,index) in contacts[currentIndex].messages">
                         <!-- create template to user message  -->
                         <!-- <div class="magic date"></div> -->
                         <div class="position_messagge d-flex justify-content-end dropdown"
@@ -191,7 +192,7 @@
                            <div class="user_message_container my-1 position-relative"
                               :class="light ? 'bg_user_message' : 'bg_dark_messages'">
                               <div class="message_text text-break me-1">{{message.message}}</div>
-                              <div class="message_time fs_7 color_time text-end">{{extractTime(index)}}</div>
+                              <div class="message_time color_time text-end" :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }">{{extractTime(index)}}</div>
                               <div class="arrow_delete position-absolute" data-bs-toggle="dropdown">
                                  <i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i>
                               </div>
@@ -209,7 +210,7 @@
                         <div class="contact_text my-1 position-relative"
                            :class="light ? 'bg-light ' : 'bg_dark_messages'" data-bs-toggle="dropdown" v-else>
                            <div class="message_text text-break me-1">{{message.message}}</div>
-                           <div class="message_time fs_7 color_time text-end">{{extractTime(index)}}</div>
+                           <div class="message_time color_time text-end" :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }">{{extractTime(index)}}</div>
                            <div class="arrow_delete position-absolute">
                               <i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i>
                            </div>

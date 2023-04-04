@@ -1,6 +1,7 @@
 /* General selector  */
 body {
     font-family: 'Roboto', sans-serif;
+    min-width: 400px;
 }
 
 .dark_layout,
@@ -85,6 +86,21 @@ div i:hover {
 .fs_7 {
     font-size: calc(7px + 0.1vw);
 }
+
+.fs_12_plus {
+    font-size: 16px !important;
+}
+.fs_10_plus {
+    font-size: 14px !important;
+}
+.fs_9_plus {
+    font-size: 13px !important;
+}
+
+.fs_7_plus {
+    font-size: 10px !important;
+}
+
 
 .standard_height {
     height: 40px;
