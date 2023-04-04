@@ -1,7 +1,7 @@
 /* General selector  */
 body {
     font-family: 'Roboto', sans-serif;
-    min-width: 400px;
+
 }
 
 .dark_layout,
@@ -13,11 +13,19 @@ input[type="search"],
 input[type="text"] {
     outline: none;
     border: none;
+    padding-left: 10px;
+
+}
+
+button i,
+div i {
+    transition-duration: 0.2s;
 }
 
 button i:hover,
-div i:hover {
-    filter: brightness(120%);
+div i:hover:not(".bell_icon") {
+    filter: brightness(80%);
+    transform: scale(1.04)
 }
 
 /* Utility selector  */
@@ -47,7 +55,7 @@ div i:hover {
 }
 
 .special_background {
-    background-image: url("../img/mine.jpg");    
+    background-image: url("../img/mine.jpg");
 
 }
 
@@ -81,6 +89,7 @@ div i:hover {
 
 .fs_9 {
     font-size: calc(9px + 0.1vw);
+    line-height: 0.75rem;
 }
 
 .fs_7 {
@@ -88,13 +97,16 @@ div i:hover {
 }
 
 .fs_12_plus {
-    font-size: 16px !important;
+    font-size: 15px !important;
 }
+
 .fs_10_plus {
     font-size: 14px !important;
 }
+
 .fs_9_plus {
-    font-size: 13px !important;
+    font-size: 12px !important;
+    line-height: 0.75rem;
 }
 
 .fs_7_plus {
@@ -123,9 +135,11 @@ div i:hover {
 .drop {
     animation: drop 0.5s forwards;
 }
+
 .shadow {
     filter: drop-shadow(2px 2px 2px rgb(146, 146, 146));
 }
+
 /* Container selctor  */
 
 .my_background {
@@ -134,11 +148,10 @@ div i:hover {
 
 }
 
+
 .my_container {
-    width: 80%;
-    height: 95%;
-
-
+    width: 100%;
+    height: 100%;
 }
 
 .sidebar {
@@ -171,7 +184,7 @@ div i:hover {
 .introduction {
     font-family: 'Caveat', cursive;
     font-size: 30px;
-    
+
 }
 
 /* --------------Chats list selector ---------------- */
@@ -181,6 +194,7 @@ div i:hover {
 
 .turn_on_notifications {
     background-color: var(--bz-notification);
+
 }
 
 .bell_icon {
@@ -313,6 +327,7 @@ div i:hover {
     padding: 0 20px;
 }
 
+
 /* ------Footer-----  */
 
 footer {
@@ -327,9 +342,9 @@ footer {
     color: var(--bz-gray_light);
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     z-index: 3;
-    padding: 12px 30px 12px 30px;
+    padding: 12px 35px 12px 35px;
     border-radius: 20px;
     font-size: 20px;
     animation: fade 1s;
@@ -363,7 +378,15 @@ footer {
 
 /* MEDIA QUERY  */
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 400px) {
+    .my_container {
+        width: 80%;
+        height: 95%;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
     .sidebar {
         display: block !important;
     }

@@ -41,7 +41,7 @@
             @click="changeLayout()"><i class="fa-solid fa-moon fa-xl"></i>
          </div>
          <div class="position-fixed text-light top-0 start-0 m-3 c_pointer d-none d-sm-block" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasWithBothOptions"><i class="fa-solid fa-plus fa-xl"></i>
+            data-bs-target="#offcanvasWithBothOptions"><i class="fa-solid fa-user-plus fa-lg"></i>
          </div>
          <div class="offcanvas offcanvas-start  p-2 rb_rounded special_background" data-bs-scroll="true" tabindex="-1"
             id="offcanvasWithBothOptions">
@@ -66,7 +66,7 @@
          </div>
          <main class="my_container d-flex" :class="{'d-none' : splashPage, 'shadow' : light}">
             <!-- create a container for the various chats (chat lists)  -->
-            <div class="sidebar col-12 col-sm-4 h-100" :class="{'d-none': selectChat, 'd-block': !selectChat}">
+            <div class="sidebar col-12 col-md-4 h-100" :class="{'d-none': selectChat, 'd-block': !selectChat}">
                <!--  user profile plus navbar -->
                <div
                   class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
@@ -78,7 +78,7 @@
 
                      <button class="border border-0 text-light c_pointer d-sm-none bg-transparent"
                         data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions">
-                        <i class="fa-solid fa-plus"></i>
+                        <i class="fa-solid fa-user-plus"></i>
                      </button>
                      <button class="border border-0 text-light d-sm-none c_pointer bg-transparent" v-if="!light"
                         @click="changeLayout()">
@@ -105,7 +105,7 @@
                      </div>
                      <div class="info ms-2 d-flex flex-column">
                         <div class="fw-bold" :class="{'fs_9' : !increaseFontSize,'fs_9_plus' : increaseFontSize }">Ricevi notifiche di nuovi messaggi</div>
-                        <a href="#" class="primary_text"  :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }">Attiva notifiche desktop</a>
+                        <div class="primary_text c_pointer text-decoration-underline"  :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }">Attiva notifiche desktop</div>
                      </div>
                   </div>
                </div>
@@ -141,14 +141,14 @@
                </div>
             </div>
             <!-- create a container for main Chat  -->
-            <div class="main_chat col-12 col-sm-8 flex-column h-100 d-sm-flex special_background"
+            <div class="main_chat col-12 col-md-8 flex-column h-100 d-md-flex special_background"
                :class="{'d-none': !selectChat, 'd-flex': selectChat}">
                <div class="introduction text-center d-flex align-items-center justify-content-center h-100 px-3" v-if="currentIndex == -1"> Benvenuto su Bootzap <br> Seleziona una delle chat nella tua rubrica</div>
                <div class="current_chat" v-if="currentIndex != -1">
                   <div
                      class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary  overflow-hidden">
                      <div class="users_img d-flex align-items-center">
-                        <button class="border border-0 bg-transparent d-sm-none" @click="selectMobileChat()">
+                        <button class="border border-0 bg-transparent d-md-none" @click="selectMobileChat()">
                            <i class="fa-solid fa-arrow-left"></i>
                         </button>
                         <img class="align-middle rounded-circle" :src="contacts[currentIndex].avatar"
@@ -230,7 +230,7 @@
                   <button class="border border-0 bg-transparent">
                      <i class="fa-regular fa-face-smile "></i>
                   </button>
-                  <input type="text" class="chat_input flex-grow-1 my-1 rounded-1" v-model="msg"
+                  <input type="text" class="chat_input flex-grow-1 my-1 rounded-1" v-model="msg" 
                      @keyup.enter="createNewMessage(currentIndex)" autofocus>
                   <button class="border border-0 bg-transparent" v-if="!msg">
                      <i class="fa fa-microphone" aria-hidden="true"></i>
