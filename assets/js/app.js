@@ -1,5 +1,3 @@
-
-
 const { createApp } = Vue
 
 createApp({
@@ -270,7 +268,14 @@ createApp({
                     message: this.randomAnswers[Math.floor(Math.random() * 8)],
                     status: 'received'
                 });
-            }, 1000)
+                this.automaticScrolla()
+            }, 1000) 
+        },
+        automaticScrolla(){
+            this.$nextTick(() => {
+            const chatTextArea = document.querySelector(".chat_text") 
+                chatTextArea.scrollTo(0, chatTextArea.scrollHeight);
+            })
         },
         automaticOnline() {
 
@@ -301,27 +306,32 @@ createApp({
         changeLayout() {
             this.light = !this.light;
         },
-        deleteAllMessages(){
+        deleteAllMessages() {
             this.contacts[this.currentIndex].messages = [];
         },
-        deleteChat(index){
-            this.contacts.splice(index,1)
-            this.arrayContactsArchive.splice(index,1)
+        deleteChat(index) {
+            this.contacts.splice(index, 1)
+            this.arrayContactsArchive.splice(index, 1)
         },
-        addContact(){
-            let newContact =   {
+        addContact() {
+            let newContact = {
                 name: this.NewNameContact,
-                avatar: this.NewAvatarLink,
+                avatar: this.NewAvatarLink.trim(),
                 visible: true,
                 messages: [
                 ]
             }
-
-            this.contacts.unshift(newContact)
-            this.NewNameContact = ""
-            this.NewAvatarLink = ""
-            const btnClose = document.querySelector(".btn-close")
-            btnClose.click()
+            if (newContact.name.length > 0) {
+                if (newContact.avatar.trim() == "") {
+                    newContact.avatar = "../assets/img/foto-profilo-vuota2.jpg"
+                }
+                
+                this.contacts.unshift(newContact)
+                this.NewNameContact = ""
+                this.NewAvatarLink = ""
+                const btnClose = document.querySelector(".btn-close")
+                btnClose.click()
+            } 
         }
     },
     created() {
@@ -335,6 +345,7 @@ createApp({
 
 
 
+// potrei mettere un avatar nel caso l'immagine sia undefined
 
 
 

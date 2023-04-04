@@ -28,10 +28,10 @@
    <div id="app">
       <div class="my_background d-flex justify-content-end align-items-center flex-column"
          :class="light ? '' : 'dark_layout' ">
-         <div class="position-fixed text-light top-0 end-0 m-3 c_pointer" v-if="!light" @click="changeLayout()"><i
+         <div class="position-fixed text-light top-0 end-0 m-3 c_pointer d-sm-block" v-if="!light" @click="changeLayout()"><i
                class="fa-solid fa-sun fa-xl"></i>
          </div>
-         <div class="position-fixed text-light top-0 end-0 m-3 c_pointer" v-if="light" @click="changeLayout()"><i
+         <div class="position-fixed text-light top-0 end-0 m-3 d-none d-sm-block c_pointer" v-if="light" @click="changeLayout()"><i
                class="fa-solid fa-moon fa-xl"></i>
          </div>
          <div class="position-fixed text-light top-0 start-0 m-3 c_pointer"
@@ -57,26 +57,6 @@
                </form>
             </div>
          </div>
-
-         <!-- 
-         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Enable both scrolling & backdrop</button>
-
-         <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-           <div class="offcanvas-header">
-             <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
-             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-           </div>
-           <div class="offcanvas-body">
-             <p>Try scrolling the rest of the page to see this option in action.</p>
-           </div>
-         </div> -->
-
-
-
-
-
-
-
          <main class="my_container d-flex">
             <!-- create a container for the various chats (chat lists)  -->
             <div class="sidebar col-4 h-100">
@@ -126,7 +106,7 @@
                         <div class="img_container">
                            <img class="h-100" :src="contact.avatar" :alt="contact.name">
                         </div>
-                        <div class="info_chat ms-2 d-flex flex-column justify-content-center">
+                        <div class="info_chat ms-2" :class="{'d-flex flex-column justify-content-center' : contact.messages.length == 0 }">
                            <div class="name_current_chat fs_12 text-break">{{contact.name}}</div>
                            <div class="Last_message_sent fs_7 color_time text-break" v-if="contact.messages.length > 0">
                               {{contact.messages[contact.messages.length -
@@ -140,7 +120,7 @@
             <!-- create a container for main Chat  -->
             <div class="main_chat col-8 d-flex flex-column h-100">
 
-               <div class="current_chat">
+               <div class="current_chat" v-if="currentIndex != -1">
                   <div
                      class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
                      <div class="users_img d-flex align-items-center">
@@ -220,7 +200,7 @@
 
                </div>
                <!-- create a input text for chat place -->
-               <div class="input_text_zone standard_height background_secondary d-flex">
+               <div class="input_text_zone standard_height background_secondary d-flex" v-if="currentIndex != -1">
                   <button class="border border-0 bg-transparent">
                      <i class="fa-regular fa-face-smile "></i>
                   </button>
