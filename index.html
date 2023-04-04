@@ -128,8 +128,8 @@
                            alt="users_avatar">
                         <div class="info_chat ms-2">
                            <div class="name_current_chat fs_12 text-break">{{contacts[currentIndex].name}}</div>
-                           <div class="Last_message_sent fs_7 color_time"
-                              v-if="this.contacts[currentIndex].messages.length > 0">{{this.isWriting()}} </div>
+                           <div class="last_message_sent fs_7 color_time"
+                              v-if="this.contacts[currentIndex].messages.length > 0">{{lastDateTime()}} </div>
                         </div>
                         <!-- this.isWriting() -->
                      </div>
@@ -223,8 +223,8 @@
       </footer>
    </div>
 
-   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-   <script src="./assets/js/app.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.min.js"></script>
+   <script src="./assets/js/app2.js"></script>
 </body>
 
 </html>

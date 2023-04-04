@@ -180,9 +180,8 @@ createApp({
             ],
             NewNameContact: "",
             NewAvatarLink: "",
-            isWriting : false,
+            isWritingString: false,
             isOnline: false,
-
         }
     },
     methods: {
@@ -258,10 +257,10 @@ createApp({
                     status: 'sent'
                 });
                 this.msg = '';
-                console.log(isWritngSpace);
-
+                this.isWritingString = true
                 this.automaticAnswer(index)
             }
+
         },
         automaticAnswer(index) {
             setTimeout(() => {
@@ -270,28 +269,29 @@ createApp({
                     message: this.randomAnswers[Math.floor(Math.random() * 8)],
                     status: 'received'
                 });
-                this.automaticScroll()
-                
-            }, 1000) 
+                this.isWritingString = false
+                this.isOnline = true
+                this.automaticScrolla()
+            }, 1000)
         },
-        automaticScroll(){
+        automaticScrolla() {
             this.$nextTick(() => {
-            const chatTextArea = document.querySelector(".chat_text") 
+                const chatTextArea = document.querySelector(".chat_text")
                 chatTextArea.scrollTo(0, chatTextArea.scrollHeight);
                 setTimeout(() => {
-                    this.lastDateTime()
-                },2000)
+                    this.isOnline = false
+                }, 3000)
             })
         },
-        lastDateTime(){
-            if(!this.isWriting && !this.isOnline) {
+        lastDateTime() {
+            if (!this.isWritingString && !this.isOnline) {
                 return 'Ultimo accesso ' +
-                this.extractLastDate(this.currentIndex) + ' alle ' +
-                this.extractLastTime(this.currentIndex)
-            } else if (this.isWriting && !this.isOnline) {
+                    this.extractLastDate(this.currentIndex) + ' alle ' +
+                    this.extractLastTime(this.currentIndex)
+            } else if (this.isWritingString && !this.isOnline) {
                 return "Sta scrivendo.."
             } else {
-                Online
+                return "Online"
             }
         },
         functionSearch() {
@@ -328,13 +328,13 @@ createApp({
                 if (newContact.avatar.trim() == "") {
                     newContact.avatar = "../assets/img/foto-profilo-vuota2.jpg"
                 }
-                
+
                 this.contacts.unshift(newContact)
                 this.NewNameContact = ""
                 this.NewAvatarLink = ""
                 const btnClose = document.querySelector(".btn-close")
                 btnClose.click()
-            } 
+            }
         }
     },
     created() {
@@ -349,7 +349,6 @@ createApp({
 
 
 // potrei mettere un avatar nel caso l'immagine sia undefined
-
 
 
 
