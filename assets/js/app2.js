@@ -215,7 +215,7 @@ createApp({
         extractLastDate(index) {
             if (this.contacts[index].messages.length > 0) {
                 const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
-                return date
+                return date.slice(0,-4) + date.slice(-2)
             }
         },
         extractLastTime(index) {

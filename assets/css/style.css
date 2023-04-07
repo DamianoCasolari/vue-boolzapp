@@ -338,12 +338,13 @@ div i:hover {
 
 .chats_list img,
 .users_img img {
-    height: 30px;
-    aspect-ratio: 1/1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    object-fit: contain;
     border-radius: 50%;
+}
+
+.img_container {
+    height: 50px;
+    aspect-ratio: 1/1;
 }
 
 .chats_list {
@@ -357,7 +358,7 @@ div i:hover {
 }
 
 .name_current_chat {
-    max-height: 24px !important;
+    max-height: 21px !important;
     overflow: hidden !important;
 }
 
