@@ -336,6 +336,7 @@ createApp({
             this.addId()
             this.currentIndex = -1;
             this.selectChat = false;
+            this.functionSearch()
             if (this.contacts.length == 0) {
                 this.currentIndex = -1
                 this.selectChat = false;
