@@ -1,3 +1,6 @@
+import Picker from './emoji-picker.js';
+
+
 const { createApp } = Vue
 
 createApp({
@@ -106,7 +109,7 @@ createApp({
                 },
                 {
                     name: 'Claudia',
-                    avatar: './assets/img/avatar_5.jpg',
+                    avatar: './assets/img/avatar_6.jpg',
                     visible: true,
                     messages: [
                         {
@@ -184,7 +187,8 @@ createApp({
             isOnline: false,
             selectChat: false,
             splashPage: true,
-            increaseFontSize : false,
+            increaseFontSize: false,
+            showEmoji: false,
         }
     },
     methods: {
@@ -209,17 +213,20 @@ createApp({
         },
 
         extractLastDate(index) {
-            const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
-            return date
-
+            if (this.contacts[index].messages.length > 0) {
+                const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
+                return date
+            }
         },
         extractLastTime(index) {
-            const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
-            if (time.length > 5) {
-                return (time.slice(0, -3))
-            } else {
-                return time
+            if (this.contacts[index].messages.length > 0) {
+                const [date, time] = this.contacts[index].messages[this.contacts[index].messages.length - 1].date.split(" ")
+                if (time.length > 5) {
+                    return (time.slice(0, -3))
+                } else {
+                    return time
 
+                }
             }
 
         },
@@ -235,7 +242,8 @@ createApp({
         changeCurrentIndex(index) {
             this.toSaveMsg()
             this.msg = ""
-            this.currentIndex = index;
+            this.currentIndex = this.arrayContactsArchive[index].id;
+            // this.currentIndex = index;
             this.checkArchiveMessage()
         },
         toSaveMsg() {
@@ -287,25 +295,29 @@ createApp({
             })
         },
         lastDateTime() {
-            if (!this.isWritingString && !this.isOnline) {
-                return 'Ultimo accesso ' +
-                    this.extractLastDate(this.currentIndex) + ' alle ' +
-                    this.extractLastTime(this.currentIndex)
-            } else if (this.isWritingString && !this.isOnline) {
-                return "Sta scrivendo.."
-            } else {
-                return "Online"
+            if (this.contacts[this.currentIndex].messages.length > 0) {
+                if (!this.isWritingString && !this.isOnline) {
+                    return 'Ultimo accesso ' +
+                        this.extractLastDate(this.currentIndex) + ' alle ' +
+                        this.extractLastTime(this.currentIndex)
+                } else if (this.isWritingString && !this.isOnline) {
+                    return "Sta scrivendo.."
+                } else {
+                    return "Online"
+                }
             }
         },
         functionSearch() {
-            const newFilterArray = this.arrayContactsArchive.filter((object) => object.name.toLowerCase().includes(this.searchInput))
-            this.contacts = newFilterArray
+
+            const newFilterArray = this.contacts.filter((object) => object.name.toLowerCase().includes(this.searchInput.toLowerCase()))
+            this.arrayContactsArchive = newFilterArray
             console.log(newFilterArray);
 
         },
         deleteMessage(index) {
             if (this.contacts[this.currentIndex].messages[index]) {
-                this.contacts[this.currentIndex].messages.splice(index, 1)
+                this.arrayContactsArchive[this.currentIndex].messages.splice(index, 1)
+
             }
         },
         changeLayout() {
@@ -313,10 +325,21 @@ createApp({
         },
         deleteAllMessages() {
             this.contacts[this.currentIndex].messages = [];
+            this.arrayContactsArchive[this.currentIndex].messages = [];
+
+
         },
         deleteChat(index) {
             this.contacts.splice(index, 1)
             this.arrayContactsArchive.splice(index, 1)
+            this.removeId()
+            this.addId()
+            this.currentIndex = -1;
+            this.selectChat = false;
+            if (this.contacts.length == 0) {
+                this.currentIndex = -1
+                this.selectChat = false;
+            }
         },
         addContact() {
             let newContact = {
@@ -332,9 +355,13 @@ createApp({
                 }
 
                 this.contacts.unshift(newContact)
+                this.arrayContactsArchive.unshift(newContact)
                 this.NewNameContact = ""
                 this.NewAvatarLink = ""
                 const btnClose = document.querySelector(".btn-close")
+                this.removeId()
+                this.addId()
+                this.currentIndex++
                 btnClose.click()
             }
         },
@@ -347,23 +374,44 @@ createApp({
         splashPageFunction() {
             setTimeout(() => {
                 this.splashPage = !this.splashPage
-            },1000)
+            }, 1000)
+        },
+        onSelectEmoji(emoji) {
+            this.msg += emoji.i;
+        },
+        toggleEmoji() {
+            this.showEmoji = !this.showEmoji
+        },
+        closePicker(event) {
+            const picker = document.querySelector('#pick_id');
+            if (this.currentIndex != -1) {
+                if (!picker.contains(event.target)) {
+                    this.showEmoji = false;
+                }
+            }
+        },
+        addId() {
+            this.contacts.forEach((object, index) => {
+                object.id = index
+            })
+        },
+        removeId() {
+            this.contacts.forEach((object, index) => {
+                delete object.id
+            })
         }
+
     },
     created() {
         this.createDateToday()
         this.createCurrentTime()
         this.saveContacts()
         this.splashPageFunction()
+        window.addEventListener('click', this.closePicker);
+        this.addId()
+        console.log(this.contacts);
     },
-
-}).mount('#app')
-
-
-
-
-
-
-
-
-
+    // beforeDestroy() {
+    //     window.removeEventListener('click', this.closePicker);
+    // },
+}).component('Picker', Picker).mount('#app')

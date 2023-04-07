@@ -9,7 +9,9 @@
 
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+   <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet">
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
       integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
@@ -21,179 +23,235 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"
       defer></script>
 
+   <link rel="stylesheet" href="./assets/js/style.css">
    <link rel="stylesheet" href="./assets/css/style.css">
+
 
 </head>
 
 <body>
    <div id="app">
-
       <div class="splash_page position-absolute" :class="{'d-none' : !splashPage}">
          <span class="paperPlane me-2"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
          <span class="splah_text">Bootzap</span>
       </div>
-      <div class="my_background d-flex justify-content-end align-items-center flex-column"
-         :class="light ? '' : 'dark_layout' ">
-         <div class="position-fixed text-light top-0 end-0 m-3 c_pointer d-none d-sm-block drop" v-if="!light"
-            @click="changeLayout()"><i class="fa-solid fa-sun fa-xl"></i>
-         </div>
-         <div class="position-fixed text-light top-0 end-0 m-3 d-none d-sm-block c_pointer drop" v-if="light"
-            @click="changeLayout()"><i class="fa-solid fa-moon fa-xl"></i>
-         </div>
-         <div class="position-fixed text-light top-0 start-0 m-3 c_pointer d-none d-sm-block" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasWithBothOptions"><i class="fa-solid fa-user-plus fa-lg"></i>
-         </div>
-         <div class="offcanvas offcanvas-start  p-2 rb_rounded special_background" data-bs-scroll="true" tabindex="-1"
-            id="offcanvasWithBothOptions">
-            <div class="offcanvas-header">
-               <div id="offcanvasWithBothOptionsLabel" class="fw-bold">Nuovo contatto</div>
-               <button type="button" class="btn-close fs-6 align-middle" data-bs-dismiss="offcanvas"
-                  aria-label="Close"></button>
+      
+      <div v-cloak>
+         <div class="my_background d-flex justify-content-end align-items-center flex-column"
+            :class="light ? '' : 'dark_layout' ">
+            <div class="position-fixed text-light top-0 end-0 m-3 c_pointer d-none d-sm-block drop" v-if="!light"
+               @click="changeLayout()"><i class="fa-solid fa-sun fa-xl"></i>
             </div>
-            <div class="offcanvas-body d-flex flex-column align-items-center p-1 ">
-               <form action="">
-                  <label for="newName" class="col-form-label" :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">Nome</label>
-                  <input id="newName" class="input-group border border-2 m-1" type="text" v-model="NewNameContact">
-                  <!-- autofocus non funziona mai-->
-                  <label for="newAvatar" class="col-form-label" :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">Link immagine profilo</label>
-                  <input id="newAvatar" class="input-group border border-2 m-1 text-start" type="text"
-                     v-model="NewAvatarLink">
-                  <button class=" rounded-pill background_primary bordre border-0 m-2 py-2 px-4 text-white" :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }"
-                     @click.prevent="addContact()">Aggiungi
-                     nuovo contatto</button>
-               </form>
+            <div class="position-fixed text-light top-0 end-0 m-3 d-none d-sm-block c_pointer drop" v-if="light"
+               @click="changeLayout()"><i class="fa-solid fa-moon fa-xl"></i>
             </div>
-         </div>
-         <main class="my_container d-flex" :class="{'d-none' : splashPage, 'shadow' : light}">
-            <!-- create a container for the various chats (chat lists)  -->
-            <div class="sidebar col-12 col-md-4 h-100" :class="{'d-none': selectChat, 'd-block': !selectChat}">
-               <!--  user profile plus navbar -->
-               <div
-                  class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
-                  <div class="users_img d-flex align-items-center">
-                     <img class="align-middle rounded-circle" src="./assets/img/avatar_io.jpg" alt="users_avatar">
-                     <div class="user_name ms-2 fw-bold primary_text"  :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">Sofia</div>
-                  </div>
-                  <nav class="user_option d-flex align-items-center">
-
-                     <button class="border border-0 text-light c_pointer d-sm-none bg-transparent"
-                        data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions">
-                        <i class="fa-solid fa-user-plus"></i>
-                     </button>
-                     <button class="border border-0 text-light d-sm-none c_pointer bg-transparent" v-if="!light"
-                        @click="changeLayout()">
-                        <i class="fa-solid fa-sun "></i>
-                     </button>
-                     <button class="border border-0 text-light d-sm-none c_pointer bg-transparent" v-if="light"
-                        @click="changeLayout()">
-                        <i class="fa-solid fa-moon"></i>
-                     </button>
-
-                     <button class="border border-0 bg-transparent" @click="changeSize()"><i class="fa-solid fa-font"></i></button>
-                     <button class="border border-0 bg-transparent"><i class="fa-solid fa-circle-notch"></i></button>
-                     <button class="border border-0 bg-transparent"><i class="fa-solid fa-message"></i></button>
-                     <button class="border border-0 bg-transparent"><i
-                           class="fa-solid fa-ellipsis-vertical"></i></button>
-                  </nav>
+            <div class="position-fixed text-light top-0 start-0 m-3 c_pointer d-none d-sm-block"
+               data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"><i
+                  class="fa-solid fa-user-plus fa-lg"></i>
+            </div>
+            <div class="offcanvas offcanvas-start p-2 rb_rounded special_background" data-bs-scroll="true" tabindex="-1"
+               id="offcanvasWithBothOptions">
+               <div class="offcanvas-header">
+                  <div id="offcanvasWithBothOptionsLabel" class="fw-bold">Nuovo contatto</div>
+                  <button type="button" class="btn-close fs-6 align-middle" data-bs-dismiss="offcanvas"
+                     aria-label="Close"></button>
                </div>
-               <!-- add notification banner  -->
-               <div class="turn_on_notifications standard_height p-2 overflow-hidden">
-                  <div class="users_img d-flex align-items-center h-100">
-
-                     <div class="bell_icon align-middle rounded-circle">
-                        <i class="fa-solid fa-bell-slash"></i>
-                     </div>
-                     <div class="info ms-2 d-flex flex-column">
-                        <div class="fw-bold" :class="{'fs_9' : !increaseFontSize,'fs_9_plus' : increaseFontSize }">Ricevi notifiche di nuovi messaggi</div>
-                        <div class="primary_text c_pointer text-decoration-underline"  :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }">Attiva notifiche desktop</div>
-                     </div>
-                  </div>
+               <div class="offcanvas-body d-flex flex-column align-items-center p-1 ">
+                  <form action="">
+                     <label for="newName" class="col-form-label"
+                        :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">Nome</label>
+                     <input id="newName" class="input-group border border-2 m-1" type="text" v-model="NewNameContact">
+                     <!-- autofocus non funziona mai-->
+                     <label for="newAvatar" class="col-form-label"
+                        :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">Link immagine
+                        profilo</label>
+                     <input id="newAvatar" class="input-group border border-2 m-1 text-start" type="text"
+                        v-model="NewAvatarLink">
+                     <button class=" rounded-pill background_primary bordre border-0 m-2 py-2 px-4 text-white"
+                        :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }"
+                        @click.prevent="addContact()">Aggiungi
+                        nuovo contatto</button>
+                  </form>
                </div>
-               <!-- search name in chats list  -->
-               <div class="input_container d-flex align-items-center">
-                  <div class="bg-white fs_12 d-flex align-items-center px-3"><i
-                        class="fa-xs fa-solid fa-magnifying-glass mt-1"></i>
-                  </div>
-                  <input type="search" class="w-100" placeholder="Cerca o inizia una nuova chat"
-                     class="border border-0" :class="{'fs_10' : !increaseFontSize,'fs_10_plus' : increaseFontSize }" v-model="searchInput" @input.trim="functionSearch()">
-               </div>
-               <!-- create chats list  -->
-               <div class="chats_container">
+            </div>
+            <main class="my_container d-flex" :class="{'d-none' : splashPage, 'shadow' : light}">
+               <!-- create a container for the various chats (chat lists)  -->
+               <div class="sidebar col-12 col-md-4 d-flex flex-column"
+                  :class="{'d-none': selectChat, 'd-flex': !selectChat}">
+                  <!--  user profile plus navbar -->
                   <div
-                     class="chats_list p-2 d-flex justify-content-between standard_list_height c_pointer overflow-hidden"
-                     :class="index == currentIndex ? 'chat_clicked' : '' " v-for="(contact,index) in contacts"
-                     @click="changeCurrentIndex(index), selectMobileChat()">
-
-                     <div class="chat_contact_info d-flex">
-                        <div class="img_container">
-                           <img class="h-100" :src="contact.avatar" :alt="contact.name">
+                     class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary">
+                     <div class="users_img d-flex align-items-center h-100">
+                        <div class="img_container h-100">
+                           <img class="align-middle rounded-circle h-100" src="./assets/img/avatar_io.jpg"
+                              alt="users_avatar">
                         </div>
-                        <div class="info_chat ms-2"
-                           :class="{'d-flex flex-column justify-content-center' : contact.messages.length == 0 }">
-                           <div class="name_current_chat text-break"  :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">{{contact.name}}</div>
-                           <div class="Last_message_sent color_time text-break"  :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }" v-if="contact.messages.length > 0">
-                              {{contact.messages[contact.messages.length -
-                              1].message}}</div>
-                        </div>
+                        <div class="user_name ms-2 fw-bold primary_text"
+                           :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">Sofia</div>
                      </div>
-                     <div class="color_time" :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }" v-if="contact.messages.length > 0">{{extractLastDate(index)}} </div>
-                  </div>
-               </div>
-            </div>
-            <!-- create a container for main Chat  -->
-            <div class="main_chat col-12 col-md-8 flex-column h-100 d-md-flex special_background"
-               :class="{'d-none': !selectChat, 'd-flex': selectChat}">
-               <div class="introduction text-center d-flex align-items-center justify-content-center h-100 px-3" v-if="currentIndex == -1"> Benvenuto su Bootzap <br> Seleziona una delle chat nella tua rubrica</div>
-               <div class="current_chat" v-if="currentIndex != -1">
-                  <div
-                     class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary  overflow-hidden">
-                     <div class="users_img d-flex align-items-center">
-                        <button class="border border-0 bg-transparent d-md-none" @click="selectMobileChat()">
-                           <i class="fa-solid fa-arrow-left"></i>
-                        </button>
-                        <img class="align-middle rounded-circle" :src="contacts[currentIndex].avatar"
-                           alt="users_avatar">
-                        <div class="info_chat ms-2">
-                           <div class="name_current_chat text-break"  :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">{{contacts[currentIndex].name}}</div>
-                           <div class="last_message_sent color_time d-sm-block" :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }"
-                              v-if="this.contacts[currentIndex].messages.length > 0">{{lastDateTime()}} </div>
-                        </div>
-                     </div>
-                     <!-- create navbar current contact  -->
                      <nav class="user_option d-flex align-items-center">
-                        <button class="border border-0 bg-transparent">
-                           <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <button class="border border-0 text-light c_pointer d-sm-none bg-transparent"
+                           data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions">
+                           <i class="fa-solid fa-user-plus"></i>
                         </button>
-                        <button class="border border-0 bg-transparent">
-                           <i class="fa-solid fa-paperclip"></i>
+                        <button class="border border-0 text-light d-sm-none c_pointer bg-transparent" v-if="!light"
+                           @click="changeLayout()">
+                           <i class="fa-solid fa-sun "></i>
                         </button>
-                        <button class="border border-0 bg-transparent" data-bs-toggle="dropdown">
-                           <i class="fa-solid fa-ellipsis-vertical"></i>
+                        <button class="border border-0 text-light d-sm-none c_pointer bg-transparent" v-if="light"
+                           @click="changeLayout()">
+                           <i class="fa-solid fa-moon"></i>
                         </button>
-                        <ul class="dropdown-menu">
-                           <li>
-                              <div class="dropdown-item c_pointer" @click="deleteAllMessages()">Delete all messages
-                              </div>
-                           </li>
-                           <li>
-                              <div class="dropdown-item c_pointer" @click="deleteChat(this.currentIndex)">Delete chat
-                              </div>
-                           </li>
-                        </ul>
+
+                        <button class="border border-0 bg-transparent" @click="changeSize()"><i
+                              class="fa-solid fa-font"></i></button>
+                        <button class="border border-0 bg-transparent"><i class="fa-solid fa-circle-notch"></i></button>
+                        <button class="border border-0 bg-transparent"><i class="fa-solid fa-message"></i></button>
+                        <button class="border border-0 bg-transparent"><i
+                              class="fa-solid fa-ellipsis-vertical"></i></button>
                      </nav>
                   </div>
-                  <!-- create a primary chat place for the current contact -->
-                  <div class="chat_text" v-if="contacts[currentIndex].messages.length > 0">
-                     <div class="container_messages"  :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }" v-for="(message,index) in contacts[currentIndex].messages">
-                        <!-- create template to user message  -->
-                        <!-- <div class="magic date"></div> -->
-                        <div class="position_messagge d-flex justify-content-end dropdown"
-                           v-if="message.status == 'sent'">
-                           <div class="user_message_container my-1 position-relative"
-                              :class="light ? 'bg_user_message' : 'bg_dark_messages'">
+                  <!-- add notification banner  -->
+                  <div class="turn_on_notifications standard_height p-2 overflow-hidden">
+                     <div class="users_img d-flex align-items-center h-100">
+
+                        <div class="bell_icon align-middle rounded-circle mx-2">
+                           <i class="fa-solid fa-bell-slash"></i>
+                        </div>
+                        <div class="info ms-2 d-flex flex-column">
+                           <div class="fw-bold" :class="{'fs_9' : !increaseFontSize,'fs_9_plus' : increaseFontSize }">
+                              Ricevi notifiche di nuovi messaggi</div>
+                           <div class="primary_text c_pointer text-decoration-underline"
+                              :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }">Attiva notifiche
+                              desktop</div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- search name in chats list  -->
+                  <div class="input_container d-flex align-items-center">
+                     <div class="bg-white fs_12 d-flex align-items-center px-4"><i
+                           class="fa-xs fa-solid fa-magnifying-glass mt-1"></i>
+                     </div>
+                     <input type="search" class="w-100" placeholder="Cerca o inizia una nuova chat"
+                        class="border border-0" :class="{'fs_10' : !increaseFontSize,'fs_10_plus' : increaseFontSize }"
+                        v-model="searchInput" @input.trim="functionSearch()">
+                  </div>
+                  <!-- create chats list  -->
+                  <div class="chats_container">
+                     <div
+                        class="chats_list p-2 d-flex justify-content-between standard_list_height c_pointer overflow-hidden"
+                        :class="index == currentIndex ? 'chat_clicked' : '' "
+                        v-for="(contact,index) in arrayContactsArchive"
+                        @click="changeCurrentIndex(index), selectMobileChat()">
+
+                        <div class="chat_contact_info d-flex">
+                           <div class="img_container">
+                              <img class="h-100" :src="contact.avatar" :alt="contact.name">
+                           </div>
+                           <div class="info_chat ms-2"
+                              :class="{'d-flex flex-column justify-content-center' : contact.messages.length == 0 }">
+                              <div class="name_current_chat text-break"
+                                 :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">
+                                 {{contact.name}}
+                              </div>
+                              <div class="last_message color_time text-break"
+                                 :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }"
+                                 v-if="contact.messages.length > 0">
+                                 {{contact.messages[contact.messages.length -
+                                 1].message}}</div>
+                           </div>
+                        </div>
+                        <div class="color_time" :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }"
+                           v-if="contact.messages.length > 0">{{extractLastDate(index)}} </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- create a container for main Chat  -->
+               <div class="main_chat col-12 col-md-8 flex-column h-100 d-md-flex special_background"
+                  :class="{'d-none': !selectChat, 'd-flex': selectChat}">
+                  <div class="introduction text-center d-flex align-items-center justify-content-center h-100 px-3"
+                     v-if="currentIndex == -1"> Benvenuto su Bootzap <br> Seleziona una delle chat nella tua rubrica
+                  </div>
+                  <div class="current_chat" v-if="currentIndex != -1">
+                     <div
+                        class="user_profile standard_height d-flex justify-content-between align-items-center p-2 background_secondary  overflow-hidden">
+                        <div class="users_img d-flex align-items-center h-100">
+                           <button class="border border-0 bg-transparent d-md-none" @click="selectMobileChat()">
+                              <i class="fa-solid fa-arrow-left"></i>
+                           </button>
+                           <div class="img_container h-100 ">
+                              <img class="align-middle rounded-circle h-100" :src="contacts[currentIndex].avatar"
+                                 alt="users_avatar">
+                           </div>
+                           <div class="info_chat ms-2">
+                              <div class="name_current_chat text-break"
+                                 :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }">
+                                 {{contacts[currentIndex].name}}</div>
+                              <div class="last_message_sent color_time d-sm-block"
+                                 :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }"
+                                 v-if="this.contacts[currentIndex].messages.length > 0">{{lastDateTime()}} </div>
+                           </div>
+                        </div>
+                        <!-- create navbar current contact  -->
+                        <nav class="user_option d-flex align-items-center">
+                           <button class="border border-0 bg-transparent">
+                              <i class="fa-solid fa-magnifying-glass"></i>
+                           </button>
+                           <button class="border border-0 bg-transparent">
+                              <i class="fa-solid fa-paperclip"></i>
+                           </button>
+                           <button class="border border-0 bg-transparent" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="fa-solid fa-ellipsis-vertical"></i>
+                           </button>
+                           <ul class="dropdown-menu">
+                              <li>
+                                 <div class="dropdown-item c_pointer" @click="deleteAllMessages()">Delete all messages
+                                 </div>
+                              </li>
+                              <li>
+                                 <div class="dropdown-item c_pointer" @click="deleteChat(this.currentIndex)">Delete chat
+                                 </div>
+                              </li>
+                           </ul>
+                        </nav>
+                     </div>
+                     <!-- create a primary chat place for the current contact -->
+                     <div class="chat_text" v-if="contacts[currentIndex].messages.length > 0">
+                        <div class="container_messages"
+                           :class="{'fs_12' : !increaseFontSize,'fs_12_plus' : increaseFontSize }"
+                           v-for="(message,index) in contacts[currentIndex].messages">
+                           <!-- create template to user message  -->
+                           <!-- <div class="magic date"></div> -->
+                           <div class="position_messagge d-flex justify-content-end dropdown"
+                              v-if="message.status == 'sent'">
+                              <div class="user_message_container my-1 position-relative"
+                                 :class="light ? 'bg_user_message' : 'bg_dark_messages'">
+                                 <div class="message_text text-break me-1">{{message.message}}</div>
+                                 <div class="message_time color_time text-end"
+                                    :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }">
+                                    {{extractTime(index)}}</div>
+                                 <div class="arrow_delete position-absolute" data-bs-toggle="dropdown">
+                                    <i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i>
+                                 </div>
+                                 <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Message Info</a></li>
+                                    <li>
+                                       <div class="dropdown-item c_pointer" @click="deleteMessage(index)">Delete message
+                                       </div>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                           <!-- create template to other contact message  -->
+
+                           <div class="contact_text my-1 position-relative"
+                              :class="light ? 'bg-light ' : 'bg_dark_messages'" data-bs-toggle="dropdown" v-else>
                               <div class="message_text text-break me-1">{{message.message}}</div>
-                              <div class="message_time color_time text-end" :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }">{{extractTime(index)}}</div>
-                              <div class="arrow_delete position-absolute" data-bs-toggle="dropdown">
+                              <div class="message_time color_time text-end"
+                                 :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }">
+                                 {{extractTime(index)}}</div>
+                              <div class="arrow_delete position-absolute">
                                  <i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i>
                               </div>
                               <ul class="dropdown-menu">
@@ -205,52 +263,38 @@
                               </ul>
                            </div>
                         </div>
-                        <!-- create template to other contact message  -->
-
-                        <div class="contact_text my-1 position-relative"
-                           :class="light ? 'bg-light ' : 'bg_dark_messages'" data-bs-toggle="dropdown" v-else>
-                           <div class="message_text text-break me-1">{{message.message}}</div>
-                           <div class="message_time color_time text-end" :class="{'fs_7' : !increaseFontSize,'fs_7_plus' : increaseFontSize }">{{extractTime(index)}}</div>
-                           <div class="arrow_delete position-absolute">
-                              <i class="fa fa-chevron-down fa-sm" aria-hidden="true"></i>
-                           </div>
-                           <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">Message Info</a></li>
-                              <li>
-                                 <div class="dropdown-item c_pointer" @click="deleteMessage(index)">Delete message</div>
-                              </li>
-                           </ul>
-                        </div>
                      </div>
                   </div>
-
+                  <!-- create a input text for chat place -->
+                  <div class="input_text_zone standard_height background_secondary d-flex position-relative" v-if="currentIndex != -1">
+                     <button class="border border-0 bg-transparent">
+                        <i class="fa-regular fa-face-smile fa-lg" @click.stop="toggleEmoji()"></i>
+                     </button>
+                     <input type="text" class="chat_input flex-grow-1 my-1 rounded-1" v-model="msg"
+                        @keyup.enter="createNewMessage(currentIndex)" autofocus>
+                     <button class="border border-0 bg-transparent" v-if="!msg">
+                        <i class="fa fa-microphone fa-lg" aria-hidden="true"></i>
+                     </button>
+                     <button class="border border-0 bg-transparent" v-if="msg" @click="createNewMessage(currentIndex)">
+                        <i class="fa-solid fa-paper-plane fa-lg"></i>
+                     </button>
+                     <Picker id="pick_id" @select="onSelectEmoji" class="emoji_wrapper position-absolute start-0"
+                           :class="{'d-none': !showEmoji}"  />
+                  </div>
                </div>
-               <!-- create a input text for chat place -->
-               <div class="input_text_zone standard_height background_secondary d-flex" v-if="currentIndex != -1">
-                  <button class="border border-0 bg-transparent">
-                     <i class="fa-regular fa-face-smile "></i>
-                  </button>
-                  <input type="text" class="chat_input flex-grow-1 my-1 rounded-1" v-model="msg" 
-                     @keyup.enter="createNewMessage(currentIndex)" autofocus>
-                  <button class="border border-0 bg-transparent" v-if="!msg">
-                     <i class="fa fa-microphone" aria-hidden="true"></i>
-                  </button>
-                  <button class="border border-0 bg-transparent" v-if="msg" @click="createNewMessage(currentIndex)">
-                     <i class="fa-solid fa-paper-plane"></i>
-                  </button>
-               </div>
-            </div>
-         </main>
+            </main>
+         </div>
+         <footer class="primary_text fs_12 standard_height d-flex align-items-center justify-content-center "
+            :class="light ? '' : 'dark_layout' ">
+            <i class="fa fa-copyright me-2" aria-hidden="true"></i>
+            <span>Damiano Casolari</span>
+         </footer>
       </div>
-      <footer class="primary_text fs_12 standard_height d-flex align-items-center justify-content-center "
-         :class="light ? '' : 'dark_layout' ">
-         <i class="fa fa-copyright me-2" aria-hidden="true"></i>
-         <span>Damiano Casolari</span>
-      </footer>
    </div>
-
+   
+   <script src="./assets/js/emoji-picker.js" type="module"></script>
    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.min.js"></script>
-   <script src="./assets/js/app2.js"></script>
+   <script src="./assets/js/app2.js" type="module"></script>
 </body>
 
 </html>
